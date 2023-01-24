@@ -17,7 +17,6 @@ class AssetsTableSeeder extends Seeder
     public function run(): void
     {
         $assets = [
-            'tops',
             'shirts',
             'jackets',
             'bottoms'
@@ -26,6 +25,7 @@ class AssetsTableSeeder extends Seeder
         foreach ($assets as $asset) {
             Asset::factory()->create([
                 'name'        => $asset,
+                'unit'        => 'quantity',
                 'description' => $asset
             ]);
         }

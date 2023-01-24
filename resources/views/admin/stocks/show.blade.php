@@ -45,8 +45,6 @@
                             <tr>
                                 <td class="text-capitalize">
                                     {{ $transaction->user->name }}
-                                    {{-- ({{ $transaction->user->email }})
-                                    ({{ $transaction->user->team->name }}) --}}
                                 </td>
                                 <td>{{ $transaction->stock }}</td>
                             </tr>

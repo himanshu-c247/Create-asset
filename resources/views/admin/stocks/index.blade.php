@@ -34,6 +34,7 @@
                         <th class="text-center">
                             {{ trans('cruds.stock.fields.s_no') }}
                         </th>
+                     
                         <th>
                             {{ trans('cruds.stock.fields.asset') }}
                         </th>
@@ -44,6 +45,9 @@
                         @endadmin
                         <th class="text-center">
                             {{ trans('cruds.stock.fields.current_stock') }}
+                        </th>
+                        <th>
+                            Unit
                         </th>
                         @user
                             <th class="text-center">
@@ -65,9 +69,11 @@
                             <td class="text-center">
                                 {{ $loop->index + 1 }}
                             </td>
+                           
                             <td class="text-capitalize">
                                 {{ $stock->asset->name ?? '' }}
                             </td>
+                          
                             @admin
                                 <td class="text-capitalize">
                                     {{ $stock->team->name }}
@@ -75,6 +81,9 @@
                             @endadmin
                             <td class="text-center">
                                 {{ $stock->current_stock ?? '' }}
+                            </td>
+                            <td class="text-capitalize">
+                                {{ $stock->asset->unit ?? '' }}
                             </td>
                             @user
                                 <td class="text-center">

@@ -18,7 +18,7 @@ class StocksController extends Controller
     {
         abort_if(Gate::denies('stock_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $stocks = Stock::latest()->get();
+        $stocks = Stock::with('asset')->latest()->get();
 
         return view('admin.stocks.index', compact('stocks'));
     }
@@ -63,7 +63,7 @@ class StocksController extends Controller
     {
         abort_if(Gate::denies('stock_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $stock->load('asset.transactions.user.team');
+          $stock->load('asset.transactions.user.team');
 
         return view('admin.stocks.show', compact('stock'));
     }

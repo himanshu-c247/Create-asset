@@ -1,11 +1,9 @@
 @extends('layouts.admin')
 @section('content')
-
 <div class="card">
     <div class="card-header">
         <h4>{{ trans('global.create') }} {{ trans('cruds.asset.title_singular') }}</h4>
     </div>
-
     <div class="card-body">
         <form method="POST" action="{{ route("admin.assets.store") }}" enctype="multipart/form-data">
             @csrf
@@ -40,6 +38,24 @@
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
+                <label class="" for="name">Unit</label>
+                <select class="form-control" id="status_id" name="unit">
+                    <option disabled selected>Select Unit</option>
+                    @forelse (App\Asset::Measurement as $key => $value)
+                        @if ($value)
+                            <option value="{{ $value }} {{ old('status') == $value ? 'selected' : '' }}">{{ ucfirst($value) ?? '' }}</option>
+                        @endif
+                    @empty
+                    @endforelse
+                </select>
+                @if($errors->has('unit'))
+                    <div class="text-danger">
+                        {{ $errors->first('unit') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.asset.fields.name_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="danger_level">Image</label>
                 <input type="file" name="avatar" class="form-control">
                 @if($errors->has('danger_level'))
@@ -49,6 +65,7 @@
                 @endif
                 <span class="help-block"></span>
             </div>
+
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">
                     {{ trans('global.save') }}
@@ -60,7 +77,4 @@
         </form>
     </div>
 </div>
-
-
-
 @endsection

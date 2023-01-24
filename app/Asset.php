@@ -14,6 +14,12 @@ class Asset extends Model implements HasMedia
     use SoftDeletes, HasFactory,InteractsWithMedia;
 
     public $table = 'assets';
+    const Measurement = [
+        'meter',
+        'cenmeter',
+        'feet',
+        'quantity',
+    ];
 
     protected $dates = [
         'created_at',
@@ -23,6 +29,7 @@ class Asset extends Model implements HasMedia
 
     protected $fillable = [
         'name',
+        'unit',
         'created_at',
         'updated_at',
         'deleted_at',
