@@ -32,6 +32,9 @@ class AssetsController extends Controller
     public function store(StoreAssetRequest $request)
     {
         $asset = Asset::create($request->all());
+        if($request->hasFile('avatar') && $request->file('avatar')->isValid()){
+            $asset->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
 
         return redirect()->route('admin.assets.index');
 

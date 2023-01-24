@@ -5,7 +5,7 @@
         <h4>{{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}</h4>
         @can('user_create')
             <div class="d-flex justify-content-between">
-                <a class="btn btn-success" href="{{ route("admin.users.create") }}">
+                <a class="btn btn-primary" href="{{ route("admin.users.create") }}">
                     {{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}
                 </a>
             </div>
@@ -21,7 +21,7 @@
 
                         </th>
                         <th class="text-center">
-                            {{ trans('cruds.user.fields.id') }}
+                            {{ trans('cruds.user.fields.s_no') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.name') }}
@@ -29,7 +29,7 @@
                         <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
-                        <th>
+                        <th class="text-center">
                             {{ trans('cruds.user.fields.email_verified_at') }}
                         </th>
                         <th class="text-center">
@@ -50,13 +50,13 @@
                                 {{ $loop->index + 1 }}
                             </td>
                             <td class="text-capitalize">
-                                {{ $user->name ?? '' }}
+                                {{ $user->name ?? 'NA' }}
                             </td>
                             <td class="text-capitalize">
-                                {{ $user->email ?? '' }}
+                                {{ $user->email ?? 'NA' }}
                             </td>
-                            <td>
-                                {{ $user->email_verified_at ?? '' }}
+                            <td class="text-center">
+                                {{ $user->email_verified_at ?? 'NA' }}
                             </td>
                             <td class="text-center">
                                 @foreach($user->roles as $key => $item)
@@ -65,13 +65,13 @@
                             </td>
                             <td class="text-center">
                                 @can('user_show')
-                                    <a class="btn btn-sm btn-primary" href="{{ route('admin.users.show', $user->id) }}"data-toggle="tooltip" data-placement="top" title="View">
+                                    <a class="btn btn-sm btn-default" href="{{ route('admin.users.show', $user->id) }}"data-toggle="tooltip" data-placement="top" title="View">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 @endcan
 
                                 @can('user_edit')
-                                    <a class="btn btn-sm btn-info" href="{{ route('admin.users.edit', $user->id) }}"data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <a class="btn btn-sm btn-default" href="{{ route('admin.users.edit', $user->id) }}"data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan
@@ -80,7 +80,7 @@
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>                                       
+                                        <button type="submit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>                                       
                                     </form>
                                 @endcan
 

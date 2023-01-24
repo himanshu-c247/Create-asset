@@ -27,8 +27,8 @@
                         <th>
                             {{ trans('cruds.transaction.fields.asset') }}
                         </th>
-                        <td>
-                            {{ $transaction->asset->name ?? '' }}
+                        <td class="text-capitalize">
+                            {{ $transaction->asset->name ?? 'NA' }}
                         </td>
                     </tr>
                     <tr>
@@ -36,7 +36,7 @@
                             {{ trans('cruds.transaction.fields.user') }}
                         </th>
                         <td>
-                            {{ $transaction->user->name ?? '' }}
+                            {{ $transaction->user->name ?? 'NA' }}
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                             {{ trans('cruds.transaction.fields.stock') }}
                         </th>
                         <td>
-                            {{ $transaction->stock }}
+                            {{ $transaction->stock ?? 'NA' }}
                         </td>
                     </tr>
                 </tbody>

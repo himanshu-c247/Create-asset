@@ -68,6 +68,7 @@ table.dataTable thead .sorting_desc {
     color: #23282c;
     background-color: #f0f3f5;
     border-color: #f0f3f5;
+    border: 1px solid #23282c3d;
 }
 
 .btn-default.focus,
@@ -120,4 +121,10 @@ table.dataTable thead .sorting_desc {
 div.dt-buttons {
     position: none !important;
     float: right !important;
+}
+/* logo  */
+img.logo {
+    margin-left: 36px;
+    width: 100px;
+    margin-right: 31px;
 }

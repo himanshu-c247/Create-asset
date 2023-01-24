@@ -14,7 +14,7 @@
                         <th>
                             {{ trans('cruds.role.fields.id') }}
                         </th>
-                        <td>
+                        <td >
                             {{ $role->id }}
                         </td>
                     </tr>
@@ -22,17 +22,17 @@
                         <th>
                             {{ trans('cruds.role.fields.title') }}
                         </th>
-                        <td>
-                            {{ $role->title }}
+                        <td class="text-capitalize">
+                            {{ $role->title ?? 'NA' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
                             {{ trans('cruds.role.fields.permissions') }}
                         </th>
-                        <td>
+                        <td class="text-capitalize">
                             @foreach($role->permissions as $key => $permissions)
-                                <span class="label label-info">{{ $permissions->title }}</span>
+                                <span class="label label-info">{{ str_replace('_',' ',$permissions->title) ?? 'NA' }} ,</span>
                             @endforeach
                         </td>
                     </tr>

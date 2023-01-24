@@ -27,8 +27,8 @@
                         <th>
                             {{ trans('cruds.team.fields.name') }}
                         </th>
-                        <td>
-                            {{ $team->name }}
+                        <td class="text-capitalize">
+                            {{ $team->name ?? 'NA' }}
                         </td>
                     </tr>
                 </tbody>

@@ -13,7 +13,7 @@
                         <th>
                             {{ trans('cruds.asset.fields.id') }}
                         </th>
-                        <td>
+                        <td class="">
                             {{ $asset->id }}
                         </td>
                     </tr>
@@ -21,7 +21,7 @@
                         <th>
                             {{ trans('cruds.asset.fields.name') }}
                         </th>
-                        <td>
+                        <td class="text-capitalize">
                             {{ $asset->name }}
                         </td>
                     </tr>
@@ -30,7 +30,7 @@
                             {{ trans('cruds.asset.fields.description') }}
                         </th>
                         <td>
-                            {{ $asset->description }}
+                            {{ ucfirst($asset->description) ?? '' }}
                         </td>
                     </tr>
                     <tr>

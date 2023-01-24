@@ -10,8 +10,8 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-Transaction">
                 <thead>
                     <tr>
-                        <th>
-                            Created at
+                        <th class="text-center">
+                            {{ trans('cruds.transaction.fields.s_no') }}
                         </th>
                         <th>
                             {{ trans('cruds.transaction.fields.asset') }}
@@ -19,25 +19,32 @@
                         <th>
                             {{ trans('cruds.transaction.fields.user') }}
                         </th>
-                        <th>
+                        <th class="text-center">
                             {{ trans('cruds.transaction.fields.stock') }}
+                        </th>
+                        <th class="text-center">
+                            Created at
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($transactions as $key => $transaction)
-                        <tr data-entry-id="{{ $transaction->id }}">
-                            <td>
-                                {{ $transaction->created_at}}
+                        <tr>
+                            <td class="text-center">
+                                {{ $loop->index + 1 }}
                             </td>
-                            <td>
-                                {{ $transaction->asset->name ?? '' }}
+                           
+                            <td class="text-capitalize">
+                                {{ $transaction->asset->name ?? 'NA' }}
                             </td>
-                            <td>
-                                {{ $transaction->user->name ?? '' }}
+                            <td class="text-capitalize">
+                                {{ $transaction->user->name ?? 'NA' }}
                             </td>
-                            <td>
-                                {{ $transaction->stock ?? '' }}
+                            <td class="text-center">
+                                {{ $transaction->stock ?? 'NA' }}
+                            </td>
+                            <td class="text-center">
+                                {{ $transaction->created_at ?? 'NA'}}
                             </td>
 
                         </tr>
@@ -58,7 +65,7 @@
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 
   $.extend(true, $.fn.dataTable.defaults, {
-    order: [[ 0, 'desc' ]],
+    // order: [[ 0, 'desc' ]],
     pageLength: 100,
       columnDefs: [{
           orderable: true,

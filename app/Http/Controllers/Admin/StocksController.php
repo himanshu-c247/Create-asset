@@ -18,7 +18,7 @@ class StocksController extends Controller
     {
         abort_if(Gate::denies('stock_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $stocks = Stock::all();
+        $stocks = Stock::latest()->get();
 
         return view('admin.stocks.index', compact('stocks'));
     }

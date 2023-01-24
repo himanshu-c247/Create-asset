@@ -3,6 +3,7 @@
 return [
     'actions'                              => 'Actions',
     'add'                                  => 'Add',
+    'cancel'                               => 'Cancel',
     'allRightsReserved'                    => 'All rights reserved.',
     'areYouSure'                           => 'Are you sure?',
     'clickHereToVerify'                    => 'Click here to verify',
@@ -98,7 +99,7 @@ return [
     'category_name'                        => 'Category name',
     'change_notifications_field_1_label'   => 'Send email notification to User',
     'change_notifications_field_2_label'   => 'When Entry on CRUD',
-    'change_password'                      => 'Change password',
+    'change_password'                      => 'Change Password',
     'chart_type'                           => 'Chart type',
     'code'                                 => 'Code',
     'companies'                            => 'Companies',

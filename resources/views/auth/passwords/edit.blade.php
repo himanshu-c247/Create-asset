@@ -32,7 +32,7 @@
                 <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" required>
             </div>
             <div class="form-group text-center">
-                <button class="btn btn-danger" type="submit">
+                <button class="btn btn-primary" type="submit">
                     {{ trans('global.save') }}
                 </button>
             </div>

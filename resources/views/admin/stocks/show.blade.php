@@ -15,14 +15,14 @@
                         
                     </tr>
                     <tr>
-                        <td>
+                        <td >
                             {{ $stock->id }}
                         </td>
-                        <td>
-                            {{ $stock->asset->name ?? '' }}
+                        <td class="text-capitalize">
+                            {{ $stock->asset->name ?? 'NA' }}
                         </td>
                         <td>
-                            {{ $stock->current_stock }}
+                            {{ $stock->current_stock ?? 'NA' }}
                         </td>
                     </tr>
                    

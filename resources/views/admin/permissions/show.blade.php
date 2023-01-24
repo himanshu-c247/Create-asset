@@ -14,7 +14,7 @@
                         <th>
                             {{ trans('cruds.permission.fields.id') }}
                         </th>
-                        <td>
+                        <td class="text-capitalize">
                             {{ $permission->id }}
                         </td>
                     </tr>
@@ -22,8 +22,8 @@
                         <th>
                             {{ trans('cruds.permission.fields.title') }}
                         </th>
-                        <td>
-                            {{ $permission->title }}
+                        <td class="text-capitalize">
+                            {{ $permission->title ?? 'NA' }}
                         </td>
                     </tr>
                 </tbody>

@@ -31,6 +31,9 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-Stock">
                 <thead>
                     <tr>
+                        <th class="text-center">
+                            {{ trans('cruds.stock.fields.s_no') }}
+                        </th>
                         <th>
                             {{ trans('cruds.stock.fields.asset') }}
                         </th>
@@ -59,6 +62,9 @@
                 <tbody>
                     @foreach($stocks as $key => $stock)
                         <tr>
+                            <td class="text-center">
+                                {{ $loop->index + 1 }}
+                            </td>
                             <td class="text-capitalize">
                                 {{ $stock->asset->name ?? '' }}
                             </td>
@@ -90,7 +96,7 @@
                             @enduser
                             <td class="text-center">
                                 @can('stock_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.stocks.show', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="View">
+                                    <a class="btn btn-xs btn-default" href="{{ route('admin.stocks.show', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="View">
                                        <i class="fa fa-eye"></i>
                                     </a>
                                 @endcan
@@ -114,7 +120,6 @@
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 
   $.extend(true, $.fn.dataTable.defaults, {
-    order: [[ 1, 'asc' ]],
     pageLength: 100,
       columnDefs: [{
           orderable: true,

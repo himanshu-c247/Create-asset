@@ -27,10 +27,7 @@
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">
-            <span class="navbar-brand-full text-bold">{{ trans('panel.site_title') }}</span>
-            <span class="navbar-brand-minimized">{{ trans('panel.site_title_1') }}</span>
-        </a>
+        <a href="#"><img class="logo" alt="logo" src="{{ asset('logo.png') }}"/></a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,6 +51,16 @@
     <div class="app-body">
         @include('partials.menu')
         <main class="main">
+            <div class="custom-container">
+                <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb my-0 ms-2">
+                  <li class="breadcrumb-item">
+                   <a href="" class=""> <span>Dashboard</span></a>
+                  </li>
+                  <li class="breadcrumb-item active"><span>{{ucfirst(Request::segment(2));}}</span></li>
+                 </ol>
+                </nav>
+               </div>
             <div style="padding-top: 20px" class="container-fluid">
                 @if (session('message'))
                     <div class="row mb-2">

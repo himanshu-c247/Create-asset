@@ -73,14 +73,14 @@
                 <span class="help-block">{{ trans('cruds.user.fields.team_helper') }}</span>
             </div>
             <div class="form-group text-center">
-                <button class="btn btn-danger" type="submit">
+                <button class="btn btn-primary" type="submit">
                     {{ trans('global.save') }}
                 </button>
+                <a class="btn btn-default" href="{{ route("admin.users.index") }}">
+                    {{ trans('global.cancel') }}
+                </a>
             </div>
         </form>
     </div>
 </div>
-
-
-
 @endsection

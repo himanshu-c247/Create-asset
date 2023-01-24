@@ -2,6 +2,16 @@
     <nav class="sidebar-nav">
 
         <ul class="nav">
+            @can('user_management_access','team_access')
+            <li class="nav-item">
+                <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">
+                    <i class="fa-fw fas fa-users nav-icon">
+
+                    </i>
+                    {{ trans('cruds.team.title') }}
+                </a>
+            </li>
+            @endcan
             @can('user_management_access')
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle" href="#">
@@ -44,16 +54,7 @@
                     </ul>
                 </li>
             @endcan
-            @can('user_management_access','team_access')
-            <li class="nav-item">
-                <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">
-                    <i class="fa-fw fas fa-users nav-icon">
-
-                    </i>
-                    {{ trans('cruds.team.title') }}
-                </a>
-            </li>
-            @endcan
+          
             @can('asset_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.assets.index") }}" class="nav-link {{ request()->is('admin/assets') || request()->is('admin/assets/*') ? 'active' : '' }}">

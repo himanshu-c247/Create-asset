@@ -5,7 +5,7 @@
         <h4>{{ trans('cruds.team.title_singular') }} {{ trans('global.list') }}</h4>
         @can('team_create')
             <div class="d-flex justify-content-between">
-                <a class="btn btn-success" href="{{ route("admin.teams.create") }}">
+                <a class="btn btn-primary" href="{{ route("admin.teams.create") }}">
                     {{ trans('global.add') }} {{ trans('cruds.team.title_singular') }}
                 </a>
             </div>
@@ -20,7 +20,7 @@
 
                         </th>
                         <th width="10" class="text-center">
-                            {{ trans('cruds.team.fields.id') }}
+                            {{ trans('cruds.team.fields.s_no') }}
                         </th>
                         <th>
                             {{ trans('cruds.team.fields.name') }}
@@ -40,17 +40,17 @@
                                 {{ $loop->index + 1 }}
                             </td>
                             <td class="text-capitalize">
-                                {{ $team->name ?? '' }}
+                                {{ $team->name ?? 'NA' }}
                             </td>
                             <td class="text-center">
                                 @can('team_show')
-                                    <a class="btn btn-sm btn-primary" href="{{ route('admin.teams.show', $team->id) }}" data-toggle="tooltip" data-placement="top" title="View">
+                                    <a class="btn btn-sm btn-default" href="{{ route('admin.teams.show', $team->id) }}" data-toggle="tooltip" data-placement="top" title="View">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 @endcan
 
                                 @can('team_edit')
-                                    <a class="btn btn-sm btn-info" href="{{ route('admin.teams.edit', $team->id) }}" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <a class="btn btn-sm btn-default" href="{{ route('admin.teams.edit', $team->id) }}" data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan
@@ -59,7 +59,7 @@
                                     <form action="{{ route('admin.teams.destroy', $team->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                        <button type="submit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
                                     </form>
                                 @endcan
 

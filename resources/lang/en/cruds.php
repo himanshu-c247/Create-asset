@@ -11,6 +11,8 @@ return [
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',
+            's_no'              => 'S.No',
+            's_no_helper'       => '',
             'title'             => 'Title',
             'title_helper'      => '',
             'created_at'        => 'Created at',
@@ -31,6 +33,8 @@ return [
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => '',
+            's_no'              => 'S.No',
+            's_no_helper'       => '',
             'title'              => 'Title',
             'title_helper'       => '',
             'permissions'        => 'Permissions',
@@ -51,6 +55,8 @@ return [
         'fields'         => [
             'id'                       => 'ID',
             'id_helper'                => '',
+            's_no'              => 'S.No',
+            's_no_helper'       => '',
             'name'                     => 'Name',
             'name_helper'              => '',
             'email'                    => 'Email',
@@ -81,6 +87,8 @@ return [
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => '',
+            's_no'              => 'S.No',
+            's_no_helper'       => '',
             'name'               => 'Name',
             'name_helper'        => '',
             'description'        => 'Description',
@@ -101,6 +109,8 @@ return [
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',
+            's_no'              => 'S.No',
+            's_no_helper'       => '',
             'created_at'        => 'Created at',
             'created_at_helper' => '',
             'updated_at'        => 'Updated At',
@@ -119,6 +129,8 @@ return [
         'fields'         => [
             'id'                   => 'ID',
             'id_helper'            => '',
+            's_no'              => 'S.No',
+            's_no_helper'       => '',
             'asset'                => 'Asset',
             'asset_helper'         => '',
             'current_stock'        => 'Current Stock',
@@ -141,6 +153,8 @@ return [
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',
+            's_no'              => 'S.No',
+            's_no_helper'       => '',
             'asset'             => 'Asset',
             'asset_helper'      => '',
             'stock'             => 'Stock',

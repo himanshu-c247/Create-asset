@@ -5,7 +5,7 @@
         <h4>{{ trans('cruds.permission.title_singular') }} {{ trans('global.list') }}</h4>
         @can('permission_create')
             <div class="d-flex justify-content-between">
-                <a class="btn btn-success" href="{{ route("admin.permissions.create") }}">
+                <a class="btn btn-primary" href="{{ route("admin.permissions.create") }}">
                     {{ trans('global.add') }} {{ trans('cruds.permission.title_singular') }}
                 </a>
             </div>
@@ -19,7 +19,7 @@
                         <th width="10">
                         </th>
                         <th width="10" class="text-center">
-                            {{ trans('cruds.permission.fields.id') }}
+                            {{ trans('cruds.permission.fields.s_no') }}
                         </th>
                         <th>
                             {{ trans('cruds.permission.fields.title') }}
@@ -43,13 +43,13 @@
                             </td>
                             <td class="text-center">
                                 @can('permission_show')
-                                    <a class="btn btn-sm btn-primary" href="{{ route('admin.permissions.show', $permission->id) }}" data-toggle="tooltip" data-placement="top" title="View">
+                                    <a class="btn btn-sm btn-default" href="{{ route('admin.permissions.show', $permission->id) }}" data-toggle="tooltip" data-placement="top" title="View">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 @endcan
 
                                 @can('permission_edit')
-                                    <a class="btn btn-sm btn-info" href="{{ route('admin.permissions.edit', $permission->id) }}"data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <a class="btn btn-sm btn-default" href="{{ route('admin.permissions.edit', $permission->id) }}"data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan
@@ -58,12 +58,10 @@
                                     <form action="{{ route('admin.permissions.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                        <button type="submit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
                                     </form>
                                 @endcan
-
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>

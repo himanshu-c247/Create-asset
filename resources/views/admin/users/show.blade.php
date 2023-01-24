@@ -20,15 +20,15 @@
                             {{ trans('cruds.user.fields.id') }}
                         </th>
                         <td>
-                            {{ $user->id }}
+                            {{ $user->id ?? 'NA' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
                             {{ trans('cruds.user.fields.name') }}
                         </th>
-                        <td>
-                            {{ $user->name }}
+                        <td class="text-capitalize">
+                            {{ $user->name ?? 'NA'}}
                         </td>
                     </tr>
                     <tr>
@@ -36,7 +36,7 @@
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <td>
-                            {{ $user->email }}
+                            {{ $user->email ?? 'NA' }}
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                             {{ trans('cruds.user.fields.email_verified_at') }}
                         </th>
                         <td>
-                            {{ $user->email_verified_at }}
+                            {{ $user->email_verified_at ?? 'NA'}}
                         </td>
                     </tr>
                     <tr>
@@ -53,7 +53,7 @@
                         </th>
                         <td>
                             @foreach($user->roles as $key => $roles)
-                                <span class="label label-info">{{ $roles->title }}</span>
+                                <span class="label label-info">{{ $roles->title ?? 'NA' }}</span>
                             @endforeach
                         </td>
                     </tr>
