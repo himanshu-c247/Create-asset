@@ -13,9 +13,9 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="title">{{ trans('cruds.role.fields.title') }}</label>
-                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $role->title) }}" required>
+                <input class="form-control" type="text" name="title" id="title" value="{{ old('title', $role->title) }}">
                 @if($errors->has('title'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('title') }}
                     </div>
                 @endif
@@ -27,13 +27,13 @@
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
                     <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                 </div>
-                <select class="form-control select2 {{ $errors->has('permissions') ? 'is-invalid' : '' }}" name="permissions[]" id="permissions" multiple required>
+                <select class="form-control select2" name="permissions[]" id="permissions" multiple>
                     @foreach($permissions as $id => $permissions)
                         <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || $role->permissions->contains($id)) ? 'selected' : '' }}>{{ $permissions }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('permissions'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('permissions') }}
                     </div>
                 @endif

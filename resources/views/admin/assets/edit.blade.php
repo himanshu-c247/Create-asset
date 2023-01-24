@@ -12,9 +12,9 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.asset.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $asset->name) }}" required>
+                <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $asset->name) }}">
                 @if($errors->has('name'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('name') }}
                     </div>
                 @endif
@@ -32,9 +32,9 @@
             </div>
             <div class="form-group">
                 <label class="required" for="danger_level">Danger level</label>
-                <input class="form-control {{ $errors->has('danger_level') ? 'is-invalid' : '' }}" type="number" name="danger_level" id="danger_level" value="{{ old('danger_level', $asset->danger_level) }}" required>
+                <input class="form-control" type="number" name="danger_level" id="danger_level" value="{{ old('danger_level', $asset->danger_level) }}">
                 @if($errors->has('danger_level'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('danger_level') }}
                     </div>
                 @endif

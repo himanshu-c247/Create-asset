@@ -11,25 +11,25 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="title">{{ trans('cruds.user.fields.email') }}</label>
-                <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="text" name="email" id="email" value="{{ old('email', auth()->user()->email) }}" required>
+                <input class="form-control" type="text" name="email" id="email" value="{{ old('email', auth()->user()->email) }}">
                 @if($errors->has('email'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('email') }}
                     </div>
                 @endif
             </div>
             <div class="form-group">
                 <label class="required" for="title">New {{ trans('cruds.user.fields.password') }}</label>
-                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
+                <input class="form-control" type="password" name="password" id="password">
                 @if($errors->has('password'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('password') }}
                     </div>
                 @endif
             </div>
             <div class="form-group">
                 <label class="required" for="title">Repeat New {{ trans('cruds.user.fields.password') }}</label>
-                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" required>
+                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation">
             </div>
             <div class="form-group text-center">
                 <button class="btn btn-primary" type="submit">

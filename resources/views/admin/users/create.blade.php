@@ -11,9 +11,9 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
+                <input class="form-control" type="text" name="name" id="name" value="{{ old('name', '') }}">
                 @if($errors->has('name'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('name') }}
                     </div>
                 @endif
@@ -21,9 +21,9 @@
             </div>
             <div class="form-group">
                 <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
-                <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email') }}" required>
+                <input class="form-control" type="email" name="email" id="email" value="{{ old('email') }}">
                 @if($errors->has('email'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('email') }}
                     </div>
                 @endif
@@ -31,9 +31,9 @@
             </div>
             <div class="form-group">
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
+                <input class="form-control" type="password" name="password" id="password">
                 @if($errors->has('password'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('password') }}
                     </div>
                 @endif
@@ -45,13 +45,13 @@
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
                     <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                 </div>
-                <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}" name="roles[]" id="roles" multiple required>
+                <select class="form-control select2" name="roles[]" id="roles" multiple>
                     @foreach($roles as $id => $roles)
                         <option value="{{ $id }}" {{ in_array($id, old('roles', [])) ? 'selected' : '' }}>{{ $roles }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('roles'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('roles') }}
                     </div>
                 @endif
@@ -59,13 +59,13 @@
             </div>
             <div class="form-group">
                 <label for="team_id">{{ trans('cruds.user.fields.team') }}</label>
-                <select class="form-control select2 {{ $errors->has('team') ? 'is-invalid' : '' }}" name="team_id" id="team_id">
+                <select class="form-control select2" name="team_id" id="team_id">
                     @foreach($teams as $id => $team)
                         <option value="{{ $id }}" {{ old('team_id') == $id ? 'selected' : '' }}>{{ $team }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('team'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('team') }}
                     </div>
                 @endif
@@ -82,7 +82,4 @@
         </form>
     </div>
 </div>
-
-
-
 @endsection

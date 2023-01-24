@@ -23,7 +23,7 @@
                             {{ trans('cruds.transaction.fields.stock') }}
                         </th>
                         <th class="text-center">
-                            Created at
+                           Date
                         </th>
                     </tr>
                 </thead>
@@ -44,7 +44,7 @@
                                 {{ $transaction->stock ?? 'NA' }}
                             </td>
                             <td class="text-center">
-                                {{ $transaction->created_at ?? 'NA'}}
+                                {{ dateFormat($transaction->created_at) ?? 'NA'}}
                             </td>
 
                         </tr>

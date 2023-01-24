@@ -62,7 +62,7 @@
                 </nav>
                </div>
             <div style="padding-top: 20px" class="container-fluid">
-                @if (session('message'))
+                {{-- @if (session('message'))
                     <div class="row mb-2">
                         <div class="col-lg-12">
                             <div class="alert alert-success" role="alert">{{ session('message') }}</div>
@@ -77,7 +77,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif --}}
                 @yield('content')
             </div>
         </main>

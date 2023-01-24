@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Gate;
+use App\Team;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyTeamRequest;
 use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
-use App\Team;
-use Gate;
-use Illuminate\Http\Request;
+use App\Http\Requests\MassDestroyTeamRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class TeamController extends Controller
@@ -34,7 +34,6 @@ class TeamController extends Controller
         $team = Team::create($request->all());
 
         return redirect()->route('admin.teams.index');
-
     }
 
     public function edit(Team $team)

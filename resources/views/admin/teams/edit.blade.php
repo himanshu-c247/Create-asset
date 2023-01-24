@@ -12,9 +12,9 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.team.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $team->name) }}" required>
+                <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $team->name) }}">
                 @if($errors->has('name'))
-                    <div class="invalid-feedback">
+                    <div class="text-danger">
                         {{ $errors->first('name') }}
                     </div>
                 @endif

@@ -23,7 +23,7 @@
                             {{ trans('cruds.permission.fields.title') }}
                         </th>
                         <td class="text-capitalize">
-                            {{ $permission->title ?? 'NA' }}
+                            {{ str_replace('_',' ',$permission->title) ?? 'NA' }}
                         </td>
                     </tr>
                 </tbody>

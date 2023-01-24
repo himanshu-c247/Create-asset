@@ -56,7 +56,7 @@
                                 {{ $user->email ?? 'NA' }}
                             </td>
                             <td class="text-center">
-                                {{ $user->email_verified_at ?? 'NA' }}
+                                {{ dateFormat($user->email_verified_at) ?? 'NA' }}
                             </td>
                             <td class="text-center">
                                 @foreach($user->roles as $key => $item)

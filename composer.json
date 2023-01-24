@@ -40,6 +40,9 @@
         "psr-4": {
             "App\\": "app/"
         },
+        "files": [
+            "app/Helper/dateTimeHelper.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

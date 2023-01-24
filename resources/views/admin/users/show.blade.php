@@ -44,7 +44,7 @@
                             {{ trans('cruds.user.fields.email_verified_at') }}
                         </th>
                         <td>
-                            {{ $user->email_verified_at ?? 'NA'}}
+                            {{ dateFormat($user->email_verified_at) ?? 'NA'}}
                         </td>
                     </tr>
                     <tr>
