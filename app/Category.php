@@ -3,23 +3,14 @@
 namespace App;
 
 use \DateTimeInterface;
-use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Asset extends Model implements HasMedia
+class Category extends Model
 {
-    use SoftDeletes, HasFactory,InteractsWithMedia;
-
+    use HasFactory,SoftDeletes;
     public $table = 'assets';
-    const Measurement = [
-        'meter',
-        'cenmeter',
-        'feet',
-        'quantity',
-    ];
 
     protected $dates = [
         'created_at',
@@ -29,21 +20,13 @@ class Asset extends Model implements HasMedia
 
     protected $fillable = [
         'name',
-        'unit',
         'created_at',
         'updated_at',
         'deleted_at',
-        'description',
-        'danger_level',
+       
     ];
-
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class, 'asset_id');
     }
 }

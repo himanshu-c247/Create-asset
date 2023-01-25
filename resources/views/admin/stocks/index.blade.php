@@ -7,6 +7,7 @@
         </div>
     </div>
 @endcan --}}
+@include('sweetalert::alert')
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h4>{{ trans('cruds.stock.title_singular') }} {{ trans('global.list') }}</h4>
@@ -90,16 +91,17 @@
                                     <form action="{{ route('admin.transactions.storeStock', $stock->id) }}" method="POST" style="display: inline-block;" class="form-inline">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="action" value="add">
-                                        <input type="number" name="stock" class="form-control form-control-sm col-8" min="">
-                                        <input type="submit" class="btn btn-xs btn-danger text-right" value="ADD">
+                                        <input type="text" name="stock" class="form-control form-control-sm col-8" min="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  onkeydown="{{$stock->asset->unit == 'quantity' ? 'if(event.key==="."){event.preventDefault();}' : ' '}}">
+                                        <input type="submit" class="btn btn-xs btn-primary text-right" value="ADD">
                                     </form>
                                 </td>
                                 <td class="text-center">
-                                    <form action="{{ route('admin.transactions.storeStock', $stock->id) }}" method="POST" style="display: inline-block;" class="form-inline">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <form style="display: inline-block;" id="removeStockForm" class="form-inline">
+                                        @csrf
+                                        @method('POST')
                                         <input type="hidden" name="action" value="remove">
-                                        <input type="number" name="stock" class="form-control form-control-sm col-8" min="1">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="REMOVE">
+                                        <input type="text" name="stock" class="form-control form-control-sm col-8 stock-value"  min="1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" onkeydown="{{$stock->asset->unit == 'quantity' ? 'if(event.key==="."){event.preventDefault();}' : ' '}}">
+                                        <button type="button" class="btn btn-xs btn-primary remove-stock" data-url="{{ route('admin.transactions.storeStock', $stock->id) }}" data-current-stock={{$stock->current_stock}}>REMOVE</button>
                                     </form>
                                 </td>
                             @enduser
@@ -124,6 +126,43 @@
 @endsection
 @section('scripts')
 @parent
+
+<script>
+
+
+    $('.remove-stock').click(function() {
+            var url = $(this).attr('data-url');
+            var value = $(this).parents("tr").find('.stock-value').val();
+            var currentStock = $(this).attr('data-current-stock');
+            if(currentStock - value < 0){
+                Swal.fire({
+                title: 'Opss...',
+                text: "Not enough items in stock!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Inform Admin!'
+                })
+            }
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: $('#removeStockForm').serialize(),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function(data) {
+                    toastr.success(data.message, 'Success!', {
+                            timeOut: '4000',
+                        }),
+                        location.reload();
+                    } 
+            }) 
+    });
+</script>
+
+
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
@@ -144,4 +183,5 @@
 })
 
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection

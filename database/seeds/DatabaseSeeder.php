@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\CategorySeeder;
 use Illuminate\Database\Seeder;
 
 /**
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
             RoleUserTableSeeder::class,
             TeamsTableSeeder::class,
             AssetsTableSeeder::class,
+            CategoryTableSeeder::class,
         ]);
 
     }

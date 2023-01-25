@@ -10,7 +10,7 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('current_stock')->nullable();
+            $table->float('current_stock')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

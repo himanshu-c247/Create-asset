@@ -83,7 +83,7 @@ return [
     'asset'                                => 'Asset',
     'assets'                               => 'Assets',
     'assets_history'                       => 'Assets history',
-    'assets_management'                    => 'Assets management',
+    'assets_management'                    => 'Assets Management',
     'assigned_to'                          => 'Assigned to',
     'assigned_user'                        => 'Assigned (user)',
     'attachment'                           => 'Attachment',

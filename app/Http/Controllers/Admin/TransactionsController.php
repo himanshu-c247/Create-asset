@@ -144,9 +144,7 @@ class TransactionsController extends Controller
         $sign        = $action == 'add' ? '+' : '-';
 
         if ($stockAmount < 1) {
-            return redirect()->route('admin.stocks.index')->with([
-                'error' => 'No item was added/removed. Amount must be greater than 1.',
-            ]);
+            return redirect()->route('admin.stocks.index')->with(['error' => 'No item was added/removed. Amount must be greater than 1.']);
         }
 
         Transaction::create([
@@ -158,22 +156,17 @@ class TransactionsController extends Controller
 
         if ($action == 'add') {
             $stock->increment('current_stock', $stockAmount);
-            $status = $stockAmount . ' item(-s) was added to stock.';
+            $status = $stockAmount .' items was added to stock.';
         }
-
         if ($action == 'remove') {
             if ($stock->current_stock - $stockAmount < 0) {
-                return redirect()->route('admin.stocks.index')->with([
-                    'error' => 'Not enough items in stock.',
-                ]);
+                return response()->route('admin.stocks.index')->with(['error' => 'Not enough items in stock.',]);
             }
 
             $stock->decrement('current_stock', $stockAmount);
-            $status = $stockAmount . ' item(-s) was removed from stock.';
+            $status = $stockAmount . ' items was removed from stock.';
+            return response()->json(['status' => 'success', 'message' => $status]);
         }
-
-        return redirect()->route('admin.stocks.index')->with([
-            'status' => $status,
-        ]);
+        return redirect()->route('admin.stocks.index')->with(['success' => $status]);
     }
 }

@@ -33,7 +33,7 @@ class TeamController extends Controller
     {
         $team = Team::create($request->all());
 
-        return redirect()->route('admin.teams.index');
+        return redirect()->route('admin.teams.index')->with(['success' => 'Team Created Successfully']);
     }
 
     public function edit(Team $team)
@@ -47,7 +47,7 @@ class TeamController extends Controller
     {
         $team->update($request->all());
 
-        return redirect()->route('admin.teams.index');
+        return redirect()->route('admin.teams.index')->with(['success' => 'Stock Updated Successfully']);
 
     }
 
@@ -64,7 +64,7 @@ class TeamController extends Controller
 
         $team->delete();
 
-        return back();
+        return back()->with(['success' => 'Stock Deleted Successfully']);
 
     }
 

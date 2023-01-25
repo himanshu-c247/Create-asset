@@ -36,7 +36,7 @@ class AssetsController extends Controller
             $asset->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 
-        return redirect()->route('admin.assets.index');
+        return redirect()->route('admin.assets.index')->with(['success' => 'Assets Created Successfully']);
 
     }
 
@@ -51,7 +51,7 @@ class AssetsController extends Controller
     {
         $asset->update($request->all());
 
-        return redirect()->route('admin.assets.index');
+        return redirect()->route('admin.assets.index')->with(['success' => 'Assets Updated Successfully']);
 
     }
 
@@ -68,7 +68,7 @@ class AssetsController extends Controller
 
         $asset->delete();
 
-        return back();
+        return back()->with(['success' => 'Assets Deleted Successfully']);
 
     }
 

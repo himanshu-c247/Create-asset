@@ -34,9 +34,10 @@ class StocksController extends Controller
 
     public function store(StoreStockRequest $request)
     {
+        // return "asdasd";
         $stock = Stock::create($request->all());
 
-        return redirect()->route('admin.stocks.index');
+        return redirect()->route('admin.stocks.index')->with(['success' => 'Stock Created Successfully']);
 
     }
 
@@ -55,7 +56,7 @@ class StocksController extends Controller
     {
         $stock->update($request->all());
 
-        return redirect()->route('admin.stocks.index');
+        return redirect()->route('admin.stocks.index')->with(['success' => 'Stock Updated Successfully']);
 
     }
 
@@ -74,7 +75,7 @@ class StocksController extends Controller
 
         $stock->delete();
 
-        return back();
+        return back()->with(['success' => 'Stock Deleted Successfully']);
 
     }
 

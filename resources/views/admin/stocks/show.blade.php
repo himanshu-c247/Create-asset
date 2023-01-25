@@ -38,15 +38,21 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th class="w-75">User</th>
-                            <th>Amount</th>
+                            <th class="text-center">S.No</th>
+                            <th>Asset</th>
+                            <th>User</th>
+                            <th class="text-center">Stock</th>
+                            <th class="text-center">Date</th>
                         </tr>
                         @foreach($stock->asset->transactions as $transaction)
                             <tr>
+                                <td class=text-center> {{ $loop->index + 1 }}</td>
+                                <td>{{ $stock->asset->name ?? 'NA' }}</td>
                                 <td class="text-capitalize">
                                     {{ $transaction->user->name }}
                                 </td>
-                                <td>{{ $transaction->stock }}</td>
+                                <td class="text-center">{{ $transaction->stock }}</td>
+                                <td class="text-center">{{ dateFormat($transaction->created_at) ?? 'NA'}}</td>
                             </tr>
                         @endforeach
                     </thead>

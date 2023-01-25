@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Asset' => $baseDir . '/app/Asset.php',
+    'App\\Category' => $baseDir . '/app/Category.php',
     'App\\Console\\Commands\\DailyReportCommand' => $baseDir . '/app/Console/Commands/DailyReportCommand.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -4806,6 +4807,13 @@ return array(
     'Ramsey\\Uuid\\UuidInterface' => $vendorDir . '/ramsey/uuid/src/UuidInterface.php',
     'Ramsey\\Uuid\\Validator\\GenericValidator' => $vendorDir . '/ramsey/uuid/src/Validator/GenericValidator.php',
     'Ramsey\\Uuid\\Validator\\ValidatorInterface' => $vendorDir . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+    'RealRashid\\SweetAlert\\Console\\PublishCommand' => $vendorDir . '/realrashid/sweet-alert/src/Console/PublishCommand.php',
+    'RealRashid\\SweetAlert\\Facades\\Alert' => $vendorDir . '/realrashid/sweet-alert/src/Facades/Alert.php',
+    'RealRashid\\SweetAlert\\Storage\\AlertSessionStore' => $vendorDir . '/realrashid/sweet-alert/src/Storage/AlertSessionStore.php',
+    'RealRashid\\SweetAlert\\Storage\\SessionStore' => $vendorDir . '/realrashid/sweet-alert/src/Storage/SessionStore.php',
+    'RealRashid\\SweetAlert\\SweetAlertServiceProvider' => $vendorDir . '/realrashid/sweet-alert/src/SweetAlertServiceProvider.php',
+    'RealRashid\\SweetAlert\\ToSweetAlert' => $vendorDir . '/realrashid/sweet-alert/src/ToSweetAlert.php',
+    'RealRashid\\SweetAlert\\Toaster' => $vendorDir . '/realrashid/sweet-alert/src/Toaster.php',
     'RoleUserTableSeeder' => $baseDir . '/database/seeds/RoleUserTableSeeder.php',
     'RolesTableSeeder' => $baseDir . '/database/seeds/RolesTableSeeder.php',
     'SebastianBergmann\\CliParser\\AmbiguousOptionException' => $vendorDir . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',

@@ -20,6 +20,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @yield('styles')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
+
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
@@ -221,6 +223,20 @@
         });
     </script>
     @yield('scripts')
+      {{-- toastr js --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+  <script>
+      $(document).ready(function() {
+          toastr.options.timeOut = 5000;
+          @if (Session::has('error'))
+              toastr.error('{{ Session::get('error') }}');
+          @elseif(Session::has('success'))
+              toastr.success('{{ Session::get('success') }}');
+          @endif
+      });
+
+  </script>
 </body>
 
 </html>
