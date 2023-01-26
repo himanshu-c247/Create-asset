@@ -46,8 +46,8 @@
                         </tr>
                         @foreach($stock->asset->transactions as $transaction)
                             <tr>
-                                <td class=text-center> {{ $loop->index + 1 }}</td>
-                                <td>{{ $stock->asset->name ?? 'NA' }}</td>
+                                <td class="text-center"> {{ $loop->index + 1 }}</td>
+                                <td class="text-capitalize">{{ $stock->asset->name ?? 'NA' }}</td>
                                 <td class="text-capitalize">
                                     {{ $transaction->user->name }}
                                 </td>
