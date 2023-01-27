@@ -18,6 +18,24 @@
                 <span class="help-block">{{ trans('cruds.asset.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="name">Category</label>
+                <select class="form-control" id="category_id" name="category_id">
+                    <option disabled selected>Select Category</option>
+                    @forelse ($categories as $category)
+                        @if ($category)
+                            <option value="{{ $category->id }}">{{ ucfirst($category->name) ?? '' }}</option>
+                        @endif
+                    @empty
+                    @endforelse
+                </select>
+                @if($errors->has('category_id'))
+                    <div class="text-danger">
+                        {{ $errors->first('category_id') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.asset.fields.name_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="description">{{ trans('cruds.asset.fields.description') }}</label>
                 <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{{ old('description') }}</textarea>
                 @if($errors->has('description'))
@@ -37,6 +55,7 @@
                 @endif
                 <span class="help-block"></span>
             </div>
+          
             <div class="form-group">
                 <label class="" for="name">Unit</label>
                 <select class="form-control" id="status_id" name="unit">

@@ -11,8 +11,8 @@
                     <tr>
                         <th>{{ trans('cruds.stock.fields.id') }}</th>
                         <th>{{ trans('cruds.stock.fields.asset') }}</th>
+                        <th>Category</th>
                         <th>{{ trans('cruds.stock.fields.current_stock') }}</th>
-                        
                     </tr>
                     <tr>
                         <td >
@@ -20,6 +20,9 @@
                         </td>
                         <td class="text-capitalize">
                             {{ $stock->asset->name ?? 'NA' }}
+                        </td>
+                        <td class="text-capitalize">
+                            {{ $stock->asset->category->name ?? 'NA' }}
                         </td>
                         <td>
                             {{ $stock->current_stock ?? 'NA' }}
@@ -35,7 +38,7 @@
                 @endif
             </h4>
             @if(count($stock->asset->transactions) > 0)
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped table-hover datatable datatable-Stock">
                     <thead>
                         <tr>
                             <th class="text-center">S.No</th>
@@ -66,6 +69,28 @@
         </div>
     </div>
 </div>
+
+  <script>
+    $(function () {
+  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+
+  $.extend(true, $.fn.dataTable.defaults, {
+    pageLength: 100,
+      columnDefs: [{
+          orderable: true,
+          className: '',
+          targets: 0
+      }]
+  });
+  $('.datatable-Stock:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+        $($.fn.dataTable.tables(true)).DataTable()
+            .columns.adjust();
+    });
+})
+
+</script>
+
 
 
 

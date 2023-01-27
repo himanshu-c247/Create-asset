@@ -26,6 +26,9 @@
                         <th>
                             {{ trans('cruds.asset.fields.name') }}
                         </th>
+                        <th>
+                            Category
+                        </th>
                         <th class="text-center">
                             Image
                         </th>
@@ -52,8 +55,16 @@
                             <td class="text-capitalize">
                                 {{ $asset->name ?? 'NA' }}
                             </td>
+                            <td class="text-capitalize">
+                                {{ $asset->category->name ?? 'NA' }}
+                            </td>
+                           {{-- {{dd($asset->getFirstMediaUrl('avatar'))}} --}}
                             <td class="text-center">
-                                <img src="{{$asset->getFirstMediaUrl('avatar', 'thumb')}}"  width="120px">
+                                @if($asset->getFirstMediaUrl('avatar') != null)
+                                <img src="{{$asset->getFirstMediaUrl('avatar')}}"  width="120px">
+                                @else 
+                                <img src="{{asset('no_image.png')}}"  width="120px">
+                                @endif
                             </td>
                             <td>
                                 {{ucfirst(Str::limit($asset->description,25) ?? 'NA') }}

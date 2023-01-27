@@ -32,12 +32,16 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-Stock">
                 <thead>
                     <tr>
-                        <th class="text-center">
+                        <th class="text-center" width="12">
                             {{ trans('cruds.stock.fields.s_no') }}
                         </th>
                      
                         <th>
                             {{ trans('cruds.stock.fields.asset') }}
+                        </th>
+
+                        <th>
+                            Catgory
                         </th>
                         @admin
                             <th>
@@ -72,7 +76,10 @@
                             </td>
                            
                             <td class="text-capitalize">
-                                {{ $stock->asset->name ?? '' }}
+                                {{ $stock->asset->name ?? 'NA' }}
+                            </td>
+                            <td class="text-capitalize">
+                                {{ $stock->asset->category->name ?? 'NA' }}
                             </td>
                           
                             @admin
@@ -81,17 +88,17 @@
                                 </td>
                             @endadmin
                             <td class="text-center">
-                                {{ $stock->current_stock ?? '' }}
+                                {{ $stock->current_stock ?? 'NA' }}
                             </td>
                             <td class="text-capitalize">
-                                {{ $stock->asset->unit ?? '' }}
+                                {{ $stock->asset->unit ?? 'NA' }}
                             </td>
                             @user
                                 <td class="text-center">
                                     <form action="{{ route('admin.transactions.storeStock', $stock->id) }}" method="POST" style="display: inline-block;" class="form-inline">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="action" value="add">
-                                        <input type="text" name="stock" class="form-control form-control-sm col-8" min="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  onkeydown="{{$stock->asset->unit == 'quantity' ? 'if(event.key==="."){event.preventDefault();}' : ' '}}">
+                                        <input type="text" name="stock" class="form-control form-control-sm col-7" min="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  onkeydown="{{$stock->asset->unit == 'quantity' ? 'if(event.key==="."){event.preventDefault();}' : ' '}}">
                                         <input type="submit" class="btn btn-xs btn-primary text-right" value="ADD">
                                     </form>
                                 </td>
@@ -100,7 +107,7 @@
                                         @csrf
                                         @method('POST')
                                         <input type="hidden" name="action" value="remove">
-                                        <input type="text" name="stock" class="form-control form-control-sm col-8 stock-value"  min="1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" onkeydown="{{$stock->asset->unit == 'quantity' ? 'if(event.key==="."){event.preventDefault();}' : ' '}}">
+                                        <input type="text" name="stock" class="form-control form-control-sm col-7 stock-value"  min="1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" onkeydown="{{$stock->asset->unit == 'quantity' ? 'if(event.key==="."){event.preventDefault();}' : ' '}}">
                                         <button type="button" class="btn btn-xs btn-primary remove-stock" data-url="{{ route('admin.transactions.storeStock', $stock->id) }}" data-current-stock={{$stock->current_stock}}>REMOVE</button>
                                     </form>
                                 </td>
@@ -128,9 +135,7 @@
 @parent
 
 <script>
-
-
-    $('.remove-stock').click(function() {
+$('.remove-stock').click(function() {
             var url = $(this).attr('data-url');
             var value = $(this).parents("tr").find('.stock-value').val();
             var currentStock = $(this).attr('data-current-stock');
@@ -145,7 +150,8 @@
                 confirmButtonText: 'Inform Admin!'
                 })
             }
-            $.ajax({
+            else{
+                $.ajax({
                 url: url,
                 method: 'POST',
                 data: $('#removeStockForm').serialize(),
@@ -159,6 +165,8 @@
                         location.reload();
                     } 
             }) 
+            }
+          
     });
 </script>
 

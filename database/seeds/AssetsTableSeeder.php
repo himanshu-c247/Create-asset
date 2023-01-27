@@ -1,7 +1,6 @@
 <?php
 
 use App\Asset;
-use App\Team;
 use Illuminate\Database\Seeder;
 
 /**
@@ -29,5 +28,6 @@ class AssetsTableSeeder extends Seeder
                 'description' => $asset
             ]);
         }
+     
     }
 }

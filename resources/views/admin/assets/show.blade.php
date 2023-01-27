@@ -27,6 +27,14 @@
                     </tr>
                     <tr>
                         <th>
+                            Category
+                        </th>
+                        <td class="text-capitalize">
+                            {{ $asset->category->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.asset.fields.description') }}
                         </th>
                         <td>

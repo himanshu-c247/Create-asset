@@ -1,13 +1,40 @@
 @extends('layouts.admin')
 @section('content')
 <div class="card">
-    <div class="card-header d-flex justify-content-between">
+    <div class="card-header d-flex justify-content-between align-items-center">
         <h4>{{ trans('cruds.transaction.title_singular') }} {{ trans('global.list') }}</h4>
+        <div class="filter-search-block d-flex justify-content-between">
+            <form method="GET" id="search-form" action="{{route('admin.transactions.index')}}" autocomplete="off">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <select class="form-control" id="category" name="category">
+                            <option disabled selected>Search By Category</option>
+                            <option value="">All</option>
+                                @isset($categories)
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ ucfirst($category->name) }}</option>
+                                    @endforeach
+                                @endisset
+                        </select>
+                    </div>
+                    <div class="form-group search-group col-md-6">
+                        <div class="search-box">
+                            <input type="text" id="search" name="search" value="{{ app('request')->input('search') }}" class="form-control" placeholder="Search by Display Name">
+                            <i class="ri-search-line search-icon"></i>
+                            <div class="search-via">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <a href=""><button type="button" class="reset-btn btn btn-primary ml-3" data-toggle="tooltip" data-placement="top" title="Reset"><i class="fa fa-refresh text-white"></i></button></a> 
+        </div>
     </div>
 
     <div class="card-body">
+       
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Transaction">
+            <table class=" table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">
@@ -15,6 +42,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.transaction.fields.asset') }}
+                        </th>
+                        <th>
+                            Category
                         </th>
                         <th>
                             {{ trans('cruds.transaction.fields.user') }}
@@ -27,30 +57,16 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($transactions as $key => $transaction)
-                        <tr>
-                            <td class="text-center">
-                                {{ $loop->index + 1 }}
-                            </td>
-                           
-                            <td class="text-capitalize">
-                                {{ $transaction->asset->name ?? 'NA' }}
-                            </td>
-                            <td class="text-capitalize">
-                                {{ $transaction->user->name ?? 'NA' }}
-                            </td>
-                            <td class="text-center">
-                                {{ $transaction->stock ?? 'NA' }}
-                            </td>
-                            <td class="text-center">
-                                {{ dateFormat($transaction->created_at) ?? 'NA'}}
-                            </td>
-
-                        </tr>
-                    @endforeach
+                <tbody class="transaction-table">
+                    @include('admin.transactions.transactiontable')
                 </tbody>
             </table>
+            <div class="card-footer text-align-left">
+                {{-- {!! $categories->links() !!} --}}
+                {{-- <div class="text-right">
+                    <span class="total-record">Showing {{ $allLeave->firstItem() }} to {{ $allLeave->lastItem() }} of {{ $allLeave->total() }} entries</span>
+                </div> --}}
+            </div>
         </div>
     </div>
 </div>
@@ -60,12 +76,41 @@
 @endsection
 @section('scripts')
 @parent
+
+<script>
+    /* =========== Leave History Search =========== */
+var searchFilter = function () {
+    var form_action = $("#search-form").attr("action");
+    $.ajax({
+        url: form_action,
+        type: "GET",
+        dataType: 'json',
+        data: $('#search-form').serialize(),
+        success: function (data) {
+            $('.transaction-table').html(data.transactionSearch);
+        },
+    });
+}
+$(document).on('keyup', '#search', function () {
+    searchFilter();
+});
+
+$(document).on('change', '#category', function () {
+    searchFilter();
+});
+
+// $(document).on('change', '#status_id', function () {
+//     searchFilter();
+// });
+
+
+</script>
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 
   $.extend(true, $.fn.dataTable.defaults, {
-    // order: [[ 0, 'desc' ]],
+    // order: [[ 0, 'ase' ]],
     pageLength: 100,
       columnDefs: [{
           orderable: true,
