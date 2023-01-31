@@ -75,6 +75,7 @@ return array(
     'App\\Http\\Resources\\Admin\\UserResource' => $baseDir . '/app/Http/Resources/Admin/UserResource.php',
     'App\\Notifications\\AdminDailyReportNotification' => $baseDir . '/app/Notifications/AdminDailyReportNotification.php',
     'App\\Observers\\AssetObserver' => $baseDir . '/app/Observers/AssetObserver.php',
+    'App\\Observers\\StockObserver' => $baseDir . '/app/Observers/StockObserver.php',
     'App\\Observers\\TeamObserver' => $baseDir . '/app/Observers/TeamObserver.php',
     'App\\Permission' => $baseDir . '/app/Permission.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

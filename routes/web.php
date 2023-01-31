@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Assets
     Route::delete('assets/destroy', 'AssetsController@massDestroy')->name('assets.massDestroy');
+    Route::post('assets/update/status/{id}', 'AssetsController@updateStatus')->name('assets.updateStatus');
     Route::resource('assets', 'AssetsController');
 
     // Teams

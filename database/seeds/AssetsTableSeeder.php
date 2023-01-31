@@ -24,7 +24,8 @@ class AssetsTableSeeder extends Seeder
             Asset::factory()->create([
                 'name'        => $asset,
                 'category_id' => '1',
-                'unit'        => 'quantity',
+                'type'        => 'fabric',
+                'unit'        => 'meter',
                 'description' => $asset
             ]);
         }

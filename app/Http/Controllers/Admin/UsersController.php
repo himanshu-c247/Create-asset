@@ -57,7 +57,9 @@ class UsersController extends Controller
 
         $user->load('roles', 'team');
 
-        return view('admin.users.edit', compact('roles', 'teams', 'user'));
+        $segments = Segment::all();
+
+        return view('admin.users.edit', compact('roles', 'teams', 'user','segments'));
     }
 
     public function update(UpdateUserRequest $request, User $user)

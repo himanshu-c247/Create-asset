@@ -22,6 +22,9 @@ class UpdateAssetRequest extends FormRequest
         return [
             'name'         => 'required',
             'category_id'  => 'required',
+            'type'         => 'required',
+            'status'       => 'required',
+            'unit'         => 'required',
             'danger_level' => 'required|integer',
         ];
 

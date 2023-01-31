@@ -1,11 +1,9 @@
 @extends('layouts.admin')
 @section('content')
-
 <div class="card">
     <div class="card-header">
         <h4>{{ trans('global.edit') }} {{ trans('cruds.user.title_singular') }}</h4>
     </div>
-
     <div class="card-body">
         <form method="POST" action="{{ route("admin.users.update", [$user->id]) }}" enctype="multipart/form-data">
             @method('PUT')
@@ -39,6 +37,24 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="name">Segment</label>
+                <select class="form-control" id="segment_id" name="segment_id">
+                    <option disabled selected>Select Segment</option>
+                    @forelse ($segments as $segment)
+                        @if ($segment)
+                            <option value="{{ $segment->id }}" {{ $segment->id == $user->segment_id ? 'selected' : '' }}>{{ ucfirst($segment->name) ?? '' }}</option>
+                        @endif
+                    @empty
+                    @endforelse
+                </select>
+                @if($errors->has('segment_id'))
+                    <div class="text-danger">
+                        {{ $errors->first('segment_id') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.asset.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
