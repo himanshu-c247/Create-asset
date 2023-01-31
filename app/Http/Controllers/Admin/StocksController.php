@@ -34,7 +34,6 @@ class StocksController extends Controller
 
     public function store(StoreStockRequest $request)
     {
-        // return "asdasd";
         $stock = Stock::create($request->all());
 
         return redirect()->route('admin.stocks.index')->with(['success' => 'Stock Created Successfully']);

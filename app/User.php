@@ -35,6 +35,7 @@ class User extends Authenticatable
         'name',
         'email',
         'team_id',
+        'segment_id',
         'password',
         'created_at',
         'updated_at',
@@ -90,6 +91,12 @@ class User extends Authenticatable
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
+
+    }
+
+    public function segment()
+    {
+        return $this->belongsTo(Segment::class, 'segment_id');
 
     }
 

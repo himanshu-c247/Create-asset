@@ -20,14 +20,13 @@ class AssetsTableSeeder extends Seeder
             'jackets',
             'bottoms'
         ];
-
         foreach ($assets as $asset) {
             Asset::factory()->create([
                 'name'        => $asset,
+                'category_id' => '1',
                 'unit'        => 'quantity',
                 'description' => $asset
             ]);
         }
-     
     }
 }

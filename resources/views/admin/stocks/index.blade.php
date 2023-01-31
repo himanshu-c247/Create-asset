@@ -12,18 +12,11 @@
     <div class="card-header d-flex justify-content-between">
         <h4>{{ trans('cruds.stock.title_singular') }} {{ trans('global.list') }}</h4>
         @can('permission_create')
-            <div class="d-flex justify-content-between">
-                @if(session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-            @if(session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('error') }}
-                </div>
-            @endif
-            </div>
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-primary" href="{{ route("admin.stocks.create") }}">
+                {{ trans('global.add') }} {{ trans('cruds.stock.title_singular') }}
+            </a>
+        </div>
         @endcan
     </div>
 
@@ -84,7 +77,7 @@
                           
                             @admin
                                 <td class="text-capitalize">
-                                    {{ $stock->team->name }}
+                                    {{-- {{ $stock->team->name }} --}}
                                 </td>
                             @endadmin
                             <td class="text-center">
@@ -113,6 +106,13 @@
                                 </td>
                             @enduser
                             <td class="text-center">
+                                @admin
+                                @can('stock_show')
+                                <a class="btn btn-xs btn-default" href="{{ route('admin.stocks.edit', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                @endcan
+                                @endadmin
                                 @can('stock_show')
                                     <a class="btn btn-xs btn-default" href="{{ route('admin.stocks.show', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="View">
                                        <i class="fa fa-eye"></i>

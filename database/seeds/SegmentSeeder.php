@@ -1,23 +1,24 @@
 <?php
 
-use App\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Segment;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class CategorySeeder extends Seeder
+class SegmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
+    
     public function run(): void
     {
-        Category::create([
+        Segment::create([
             'name'           => 'Finish Product',
         ]);
 
-        Category::create([
+        Segment::create([
             'name'           => 'Raw Material',
         ]);
     }

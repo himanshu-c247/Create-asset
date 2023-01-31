@@ -61,12 +61,9 @@
                     @include('admin.transactions.transactiontable')
                 </tbody>
             </table>
-            <div class="card-footer text-align-left">
-                {{-- {!! $categories->links() !!} --}}
-                {{-- <div class="text-right">
-                    <span class="total-record">Showing {{ $allLeave->firstItem() }} to {{ $allLeave->lastItem() }} of {{ $allLeave->total() }} entries</span>
-                </div> --}}
-            </div>
+            {{$transactions->links()}}
+            {{-- <div class="text-align-left">
+            </div> --}}
         </div>
     </div>
 </div>

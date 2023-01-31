@@ -11,14 +11,12 @@
             </div>
         @endcan
     </div>
-
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-User">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-Stock">
                 <thead>
                     <tr>
                         <th width="10">
-
                         </th>
                         <th class="text-center">
                             {{ trans('cruds.user.fields.s_no') }}
@@ -29,8 +27,8 @@
                         <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
-                        <th class="text-center">
-                            {{ trans('cruds.user.fields.email_verified_at') }}
+                        <th>
+                            {{ trans('cruds.user.fields.segment') }}
                         </th>
                         <th class="text-center">
                             {{ trans('cruds.user.fields.roles') }}
@@ -55,8 +53,8 @@
                             <td class="text-capitalize">
                                 {{ $user->email ?? 'NA' }}
                             </td>
-                            <td class="text-center">
-                                {{ dateFormat($user->email_verified_at) ?? 'NA' }}
+                            <td class="text-capitalize">
+                                {{$user->segment->name ?? 'NA' }}
                             </td>
                             <td class="text-center">
                                 @foreach($user->roles as $key => $item)
@@ -83,9 +81,7 @@
                                         <button type="submit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>                                       
                                     </form>
                                 @endcan
-
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -93,9 +89,6 @@
         </div>
     </div>
 </div>
-
-
-
 @endsection
 @section('scripts')
 @parent

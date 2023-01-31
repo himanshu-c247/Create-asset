@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Asset;
-use App\Category;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyTransactionRequest;
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
-use App\Stock;
-use App\Transaction;
-use App\User;
-use Exception;
 use Gate;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\User;
+use App\Asset;
+use App\Stock;
+use Exception;
+use App\Category;
+use App\Transaction;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
+use App\Http\Requests\StoreTransactionRequest;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\UpdateTransactionRequest;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use App\Http\Requests\MassDestroyTransactionRequest;
 
 /**
  * Class TransactionsController
@@ -31,11 +31,9 @@ class TransactionsController extends Controller
      */
     public function index(Request $request)
     {
-        // return $request;
         abort_if(Gate::denies('transaction_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $search = $request['search'];
         $category = $request['category'];
-
         $categories= Category::get();
         $transactions = Transaction::with('asset','user');
         if ($request['search']) 
@@ -58,7 +56,7 @@ class TransactionsController extends Controller
                 $q->where('id',$category);
             });
         }
-        $transactions = $transactions->orderBy('id', 'DESC')->get(); 
+         $transactions = $transactions->orderBy('id', 'DESC')->paginate(1); 
         if ($request->ajax()) {
             $transactionSearch = view('admin.transactions.transactiontable', compact('transactions'))->render();
             return response()->json(['transactionSearch' => $transactionSearch]);
