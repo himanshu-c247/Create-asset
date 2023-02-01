@@ -9,11 +9,11 @@
     <td class="text-capitalize">
         {{ $stock->asset->category->name ?? 'NA' }}
     </td>
-    @admin
+    {{-- @admin
         <td class="text-capitalize">
             {{ $stock->team->name ?? 'NA' }}
         </td>
-    @endadmin
+    @endadmin --}}
     <td class="text-center">
         {{ $stock->current_stock ?? 'NA' }}
     </td>
@@ -41,11 +41,15 @@
     @enduser
     <td class="text-center">
         @admin
+        <a class="btn btn-xs btn-default assign-stock-model" data-url="{{ route('admin.stocks.assignStock', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="Assign Stock">
+            <i class="fa fa-cogs"></i>
+        </a>
         @can('stock_show')
-        <a class="btn btn-xs btn-default" href="{{ route('admin.stocks.edit', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="Edit">
+        <a class="btn btn-xs btn-default edit-stock" data-url="{{ route('admin.stocks.edit', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="Edit">
             <i class="fa fa-edit"></i>
         </a>
         @endcan
+      
         @endadmin
         @can('stock_show')
             <a class="btn btn-xs btn-default" href="{{ route('admin.stocks.show', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="View">

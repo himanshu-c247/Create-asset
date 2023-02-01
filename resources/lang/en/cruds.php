@@ -133,7 +133,7 @@ return [
             'id_helper'            => '',
             's_no'                 => 'S.No',
             's_no_helper'          => '',
-            'asset'                => 'Asset',
+            'asset'                => 'Product',
             'asset_helper'         => '',
             'current_stock'        => 'Current Stock',
             'current_stock_helper' => '',

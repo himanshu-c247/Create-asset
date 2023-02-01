@@ -31,6 +31,7 @@ class Asset extends Model implements HasMedia
         'name',
         'category_id',
         'type',
+        'status',
         'unit',
         'created_at',
         'updated_at',

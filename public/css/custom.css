@@ -159,3 +159,6 @@ table.dataTable tbody td.select-checkbox:before, table.dataTable tbody td.select
     background-repeat: no-repeat;
     background-size: cover;
 } */
+.modal-header.nav-icon {
+    margin: 5px !important;
+}

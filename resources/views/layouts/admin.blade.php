@@ -23,6 +23,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
 
 
+
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
@@ -86,6 +87,7 @@
                     </div>
                 @endif --}}
                 @yield('content')
+                <div class="model-render"></div>
             </div>
         </main>
         <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">

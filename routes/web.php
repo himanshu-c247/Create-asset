@@ -37,6 +37,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Stocks
     //Route::delete('stocks/destroy', 'StocksController@massDestroy')->name('stocks.massDestroy');
+    Route::get('stocks/assign/{id}', 'StocksController@assignStock')->name('stocks.assignStock');
+    Route::post('stocks/assign/store', 'StocksController@assignStockStore')->name('stocks.assignStockStore');
     Route::resource('stocks', 'StocksController');
 
     // Transactions

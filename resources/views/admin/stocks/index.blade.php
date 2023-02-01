@@ -6,9 +6,7 @@
         <h4>{{ trans('cruds.stock.title_singular') }} {{ trans('global.list') }}</h4>
         @can('permission_create')
         <div class="d-flex justify-content-between">
-            <a class="btn btn-primary" href="{{ route("admin.stocks.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.stock.title_singular') }}
-            </a>
+         <button class="btn btn-primary stock-model" data-url="{{ route("admin.stocks.create") }}">{{ trans('global.add') }} {{ trans('cruds.stock.title_singular') }}</button>
         </div>
         @endcan
     </div>
@@ -29,11 +27,11 @@
                         <th>
                             Catgory
                         </th>
-                        @admin
+                        {{-- @admin
                             <th>
                                 Organization
                             </th>
-                        @endadmin
+                        @endadmin --}}
                         <th class="text-center">
                             {{ trans('cruds.stock.fields.current_stock') }}
                         </th>
@@ -61,11 +59,10 @@
         </div>
     </div>
 </div>
-
 @endsection
 @section('scripts')
 @parent
-
+<script src="{{ asset('js/stock.js') }}"></script>
 <script>
 $('.remove-stock').click(function() {
             var url = $(this).attr('data-url');
@@ -101,8 +98,6 @@ $('.remove-stock').click(function() {
           
     });
 </script>
-
-
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)

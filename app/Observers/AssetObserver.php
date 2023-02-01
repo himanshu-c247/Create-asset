@@ -20,11 +20,12 @@ class AssetObserver
      */
     public function created(Asset $asset)
     {
-        //  $assets  = Asset::all();
-        // foreach ($assets as $asset) {
+        // $teams  = Team::all();
+
+        // foreach ($teams as $team) {
         //     Stock::factory()->create([
         //         'asset_id' => $asset->id,
-        //         // 'team_id'  => $team->id,
+        //         'team_id'  => $team->id,
         //     ]);
         // }
     }

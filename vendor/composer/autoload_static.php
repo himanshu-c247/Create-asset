@@ -739,7 +739,6 @@ class ComposerStaticInitcd9b0a339545dfe87a9517d1cde5ab46
         'App\\Http\\Resources\\Admin\\UserResource' => __DIR__ . '/../..' . '/app/Http/Resources/Admin/UserResource.php',
         'App\\Notifications\\AdminDailyReportNotification' => __DIR__ . '/../..' . '/app/Notifications/AdminDailyReportNotification.php',
         'App\\Observers\\AssetObserver' => __DIR__ . '/../..' . '/app/Observers/AssetObserver.php',
-        'App\\Observers\\StockObserver' => __DIR__ . '/../..' . '/app/Observers/StockObserver.php',
         'App\\Observers\\TeamObserver' => __DIR__ . '/../..' . '/app/Observers/TeamObserver.php',
         'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
