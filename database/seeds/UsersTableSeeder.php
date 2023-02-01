@@ -13,7 +13,10 @@ class UsersTableSeeder extends Seeder
                 'name'           => 'Admin',
                 'email'          => 'admin@admin.com',
                 'password'       => '$2y$10$KjopsXqbCq1NrrGYJe7rr./68LzZSGCas5XxBHHbG.9AF4mc3GPR.',
+                'email'          => 'admin@admin.com',
+                'segment_id'     => '1',
                 'remember_token' => null,
+
             ],
         ];
 

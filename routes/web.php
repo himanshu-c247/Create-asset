@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Assets
     Route::delete('assets/destroy', 'AssetsController@massDestroy')->name('assets.massDestroy');
+    Route::post('assets/update/status/{id}', 'AssetsController@updateStatus')->name('assets.updateStatus');
     Route::resource('assets', 'AssetsController');
 
     // Teams
@@ -36,7 +37,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Stocks
     //Route::delete('stocks/destroy', 'StocksController@massDestroy')->name('stocks.massDestroy');
-    Route::resource('stocks', 'StocksController')->only(['index', 'show']);
+    Route::get('stocks/assign/{id}', 'StocksController@assignStock')->name('stocks.assignStock');
+    Route::post('stocks/assign/store', 'StocksController@assignStockStore')->name('stocks.assignStockStore');
+    Route::resource('stocks', 'StocksController');
 
     // Transactions
 //    Route::delete('transactions/destroy', 'TransactionsController@massDestroy')->name('transactions.massDestroy');

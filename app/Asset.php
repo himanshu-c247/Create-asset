@@ -29,6 +29,9 @@ class Asset extends Model implements HasMedia
 
     protected $fillable = [
         'name',
+        'category_id',
+        'type',
+        'status',
         'unit',
         'created_at',
         'updated_at',
@@ -45,5 +48,10 @@ class Asset extends Model implements HasMedia
     public function transactions()
     {
         return $this->hasMany(Transaction::class, 'asset_id');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+
     }
 }

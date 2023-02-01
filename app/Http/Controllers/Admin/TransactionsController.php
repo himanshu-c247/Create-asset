@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Asset;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyTransactionRequest;
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
-use App\Stock;
-use App\Transaction;
-use App\User;
-use Exception;
 use Gate;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\User;
+use App\Asset;
+use App\Stock;
+use Exception;
+use App\Category;
+use App\Transaction;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
+use App\Http\Requests\StoreTransactionRequest;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\UpdateTransactionRequest;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use App\Http\Requests\MassDestroyTransactionRequest;
 
 /**
  * Class TransactionsController
@@ -28,13 +29,39 @@ class TransactionsController extends Controller
     /**
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('transaction_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $transactions = Transaction::all();
-
-        return view('admin.transactions.index', compact('transactions'));
+        $search = $request['search'];
+        $category = $request['category'];
+        $categories= Category::get();
+        $transactions = Transaction::with('asset','user');
+        if ($request['search']) 
+        {
+            $transactions = $transactions->with([ 'asset' => function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            },])->whereHas('asset', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            })->with([ 'user' => function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            }])->orWhereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+        if ($request['category']) 
+        {
+            $transactions = $transactions->with([ 'asset.category' => function ($q) use ($category) {
+                $q->where('id',$category);
+            },])->whereHas('asset.category', function ($q) use ($category) {
+                $q->where('id',$category);
+            });
+        }
+         $transactions = $transactions->orderBy('id', 'DESC')->paginate(1); 
+        if ($request->ajax()) {
+            $transactionSearch = view('admin.transactions.transactiontable', compact('transactions'))->render();
+            return response()->json(['transactionSearch' => $transactionSearch]);
+        }
+        return view('admin.transactions.index', compact('transactions','categories'));
     }
 
     /**

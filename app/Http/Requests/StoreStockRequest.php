@@ -31,18 +31,19 @@ class StoreStockRequest extends FormRequest
         return [
             'asset_id'      => [
                 'required',
-                'integer',
-                Rule::unique('stocks')
-                    ->where('asset_id', request()->input('asset_id'))
-                    ->where('team_id', auth()->user()->team_id)
-                    ->whereNull('deleted_at'),
-            ],
+                'integer',],
+            //     Rule::unique('stocks')
+            //         ->where('asset_id', request()->input('asset_id'))
+            //         ->where('team_id', auth()->user()->team_id)
+            //         ->whereNull('deleted_at'),
+            // ],
             'current_stock' => [
                 'nullable',
                 'integer',
             ],
         ];
     }
+
 
     /**
      * @return array

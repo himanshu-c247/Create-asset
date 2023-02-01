@@ -18,7 +18,7 @@ class AddDangerLevelFieldToAssetsTable extends Migration
     {
         if (Schema::hasTable('assets') && !Schema::hasColumn('assets', 'danger_level')) {
             Schema::table('assets', function (Blueprint $table) {
-                $table->integer('danger_level')->default(0);
+                $table->integer('danger_level')->after('description')->default(0);
         });
         }
     }

@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
-                <input class="form-control" type="email" name="email" id="email" value="{{ old('email') }}">
+                <input class="form-control" type="email" name="email" id="email" value="{{ old('email','') }}">
                 @if($errors->has('email'))
                     <div class="text-danger">
                         {{ $errors->first('email') }}
@@ -31,13 +31,31 @@
             </div>
             <div class="form-group">
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input class="form-control" type="password" name="password" id="password">
+                <input class="form-control" type="password" name="password" id="password" >
                 @if($errors->has('password'))
                     <div class="text-danger">
                         {{ $errors->first('password') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="name">Segment</label>
+                <select class="form-control" id="segment_id" name="segment_id">
+                    <option disabled selected>Select Segment</option>
+                    @forelse ($segments as $segment)
+                        @if ($segment)
+                            <option value="{{ $segment->id }} {{ old('segment_id') }}">{{ ucfirst($segment->name) ?? '' }}</option>
+                        @endif
+                    @empty
+                    @endforelse
+                </select>
+                @if($errors->has('segment_id'))
+                    <div class="text-danger">
+                        {{ $errors->first('segment_id') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.asset.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>

@@ -20,14 +20,14 @@ class TeamObserver
      */
     public function created(Team $team)
     {
-        $assets = Asset::all();
+        // $assets = Asset::all();
 
-        foreach ($assets as $asset) {
-            Stock::factory()->create([
-                'asset_id' => $asset->id,
-                'team_id'  => $team->id,
-            ]);
-        }
+        // foreach ($assets as $asset) {
+        //     Stock::factory()->create([
+        //         'asset_id' => $asset->id,
+        //         'team_id'  => $team->id,
+        //     ]);
+        // }
     }
 
     /**

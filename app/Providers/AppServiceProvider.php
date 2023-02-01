@@ -6,6 +6,7 @@ use App\Asset;
 use App\Observers\AssetObserver;
 use App\Observers\TeamObserver;
 use App\Team;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -38,5 +39,6 @@ class AppServiceProvider extends ServiceProvider
 
         Asset::observe(AssetObserver::class);
         Team::observe(TeamObserver::class);
+        Paginator::useBootstrap();
     }
 }

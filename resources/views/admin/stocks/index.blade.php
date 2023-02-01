@@ -1,49 +1,37 @@
 @extends('layouts.admin')
 @section('content')
-{{-- @can('stock_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12 mt-2">
-            
-        </div>
-    </div>
-@endcan --}}
 @include('sweetalert::alert')
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h4>{{ trans('cruds.stock.title_singular') }} {{ trans('global.list') }}</h4>
         @can('permission_create')
-            <div class="d-flex justify-content-between">
-                @if(session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-            @if(session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('error') }}
-                </div>
-            @endif
-            </div>
+        <div class="d-flex justify-content-between">
+         <button class="btn btn-primary stock-model" data-url="{{ route("admin.stocks.create") }}">{{ trans('global.add') }} {{ trans('cruds.stock.title_singular') }}</button>
+        </div>
         @endcan
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Stock">
+            <table class=" table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">
+                        <th class="text-center" width="12">
                             {{ trans('cruds.stock.fields.s_no') }}
                         </th>
                      
                         <th>
                             {{ trans('cruds.stock.fields.asset') }}
                         </th>
-                        @admin
+
+                        <th>
+                            Catgory
+                        </th>
+                        {{-- @admin
                             <th>
                                 Organization
                             </th>
-                        @endadmin
+                        @endadmin --}}
                         <th class="text-center">
                             {{ trans('cruds.stock.fields.current_stock') }}
                         </th>
@@ -64,73 +52,19 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($stocks as $key => $stock)
-                        <tr>
-                            <td class="text-center">
-                                {{ $loop->index + 1 }}
-                            </td>
-                           
-                            <td class="text-capitalize">
-                                {{ $stock->asset->name ?? '' }}
-                            </td>
-                          
-                            @admin
-                                <td class="text-capitalize">
-                                    {{ $stock->team->name }}
-                                </td>
-                            @endadmin
-                            <td class="text-center">
-                                {{ $stock->current_stock ?? '' }}
-                            </td>
-                            <td class="text-capitalize">
-                                {{ $stock->asset->unit ?? '' }}
-                            </td>
-                            @user
-                                <td class="text-center">
-                                    <form action="{{ route('admin.transactions.storeStock', $stock->id) }}" method="POST" style="display: inline-block;" class="form-inline">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="action" value="add">
-                                        <input type="text" name="stock" class="form-control form-control-sm col-8" min="" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  onkeydown="{{$stock->asset->unit == 'quantity' ? 'if(event.key==="."){event.preventDefault();}' : ' '}}">
-                                        <input type="submit" class="btn btn-xs btn-primary text-right" value="ADD">
-                                    </form>
-                                </td>
-                                <td class="text-center">
-                                    <form style="display: inline-block;" id="removeStockForm" class="form-inline">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="hidden" name="action" value="remove">
-                                        <input type="text" name="stock" class="form-control form-control-sm col-8 stock-value"  min="1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" onkeydown="{{$stock->asset->unit == 'quantity' ? 'if(event.key==="."){event.preventDefault();}' : ' '}}">
-                                        <button type="button" class="btn btn-xs btn-primary remove-stock" data-url="{{ route('admin.transactions.storeStock', $stock->id) }}" data-current-stock={{$stock->current_stock}}>REMOVE</button>
-                                    </form>
-                                </td>
-                            @enduser
-                            <td class="text-center">
-                                @can('stock_show')
-                                    <a class="btn btn-xs btn-default" href="{{ route('admin.stocks.show', $stock->id) }}" data-toggle="tooltip" data-placement="top" title="View">
-                                       <i class="fa fa-eye"></i>
-                                    </a>
-                                @endcan
-                            </td>
-
-                        </tr>
-                    @endforeach
+                <tbody class="stock-table">
+                   @include('admin.stocks.stocktable')
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
-
-
 @endsection
 @section('scripts')
 @parent
-
+<script src="{{ asset('js/stock.js') }}"></script>
 <script>
-
-
-    $('.remove-stock').click(function() {
+$('.remove-stock').click(function() {
             var url = $(this).attr('data-url');
             var value = $(this).parents("tr").find('.stock-value').val();
             var currentStock = $(this).attr('data-current-stock');
@@ -145,7 +79,8 @@
                 confirmButtonText: 'Inform Admin!'
                 })
             }
-            $.ajax({
+            else{
+                $.ajax({
                 url: url,
                 method: 'POST',
                 data: $('#removeStockForm').serialize(),
@@ -159,10 +94,10 @@
                         location.reload();
                     } 
             }) 
+            }
+          
     });
 </script>
-
-
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyUserRequest;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use Gate;
 use App\Role;
 use App\Team;
 use App\User;
-use Gate;
+use App\Segment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\MassDestroyUserRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends Controller
@@ -19,7 +20,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::latest()->get();
+        $users = User::with('segment')->latest()->get();
 
         return view('admin.users.index', compact('users'));
     }
@@ -32,7 +33,9 @@ class UsersController extends Controller
 
         $teams = Team::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.create', compact('roles', 'teams'));
+        $segments = Segment::all();
+        
+        return view('admin.users.create', compact('roles', 'teams','segments'));
     }
 
     public function store(StoreUserRequest $request)
@@ -54,7 +57,9 @@ class UsersController extends Controller
 
         $user->load('roles', 'team');
 
-        return view('admin.users.edit', compact('roles', 'teams', 'user'));
+        $segments = Segment::all();
+
+        return view('admin.users.edit', compact('roles', 'teams', 'user','segments'));
     }
 
     public function update(UpdateUserRequest $request, User $user)

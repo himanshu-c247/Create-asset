@@ -1,7 +1,6 @@
 <?php
 
 use App\Asset;
-use App\Team;
 use Illuminate\Database\Seeder;
 
 /**
@@ -21,11 +20,12 @@ class AssetsTableSeeder extends Seeder
             'jackets',
             'bottoms'
         ];
-
         foreach ($assets as $asset) {
             Asset::factory()->create([
                 'name'        => $asset,
-                'unit'        => 'quantity',
+                'category_id' => '1',
+                'type'        => 'fabric',
+                'unit'        => 'meter',
                 'description' => $asset
             ]);
         }

@@ -22,17 +22,20 @@
     @yield('styles')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
 
+
+
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
     <header class="app-header navbar">
-        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <button class="navbar-toggler sidebar-toggler d-lg-none" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a href="#">
-            {{-- {{ucfirst(auth()->user()->name)}} --}}
-            <img class="logo" alt="logo" src="{{ asset('logo.png') }}"/>
+        <a class="navbar-brand" href="#">
+            <span class="navbar-brand-full">{{ ucfirst(auth()->user()->name) }}</span>
+            {{-- <span class="navbar-brand-minimized">{{ trans('panel.site_title') }}</span> --}}
         </a>
+        {{-- <a href="#"><img class="logo" alt="logo" src="{{ asset('logo.png') }}"/></a> --}}
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -84,6 +87,7 @@
                     </div>
                 @endif --}}
                 @yield('content')
+                <div class="model-render"></div>
             </div>
         </main>
         <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -228,6 +232,7 @@
     @yield('scripts')
       {{-- toastr js --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 
   <script>
       $(document).ready(function() {
