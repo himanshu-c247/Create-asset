@@ -101,7 +101,13 @@ class StocksController extends Controller
     }
     public function assignStockStore(Request $request)
     {
-     return $request; 
-        
+        $updateStock = Stock::find($request->id);
+        $currentStock = $updateStock->current_stock - $request-> current_stock;
+        $updateStock = $updateStock->update(['current_stock' => $currentStock]);
+        $stock = Stock::create($request->all());
+        $stock->refresh();
+        $stocks = Stock::with('asset')->where('team_id',null)->latest()->paginate(15);
+        $stockTable = view('admin.stocks.stocktable',compact('stocks'))->render();
+        return response()->json(['status' => 'success','message' => 'Stock added successfully !','output' => $stockTable]);
     }
 }
