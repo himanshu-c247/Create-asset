@@ -263,7 +263,6 @@ return array(
     'Database\\Factories\\StockFactory' => $baseDir . '/database/factories/StockFactory.php',
     'Database\\Factories\\TeamFactory' => $baseDir . '/database/factories/TeamFactory.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
-    'Database\\Seeders\\CategoryTableSeeder' => $baseDir . '/database/seeds/CategoryTableSeeder.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
     'DeepCopy\\Exception\\CloneException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
     'DeepCopy\\Exception\\PropertyException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',

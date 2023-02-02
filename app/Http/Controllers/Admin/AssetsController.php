@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
 use App\Http\Requests\MassDestroyAssetRequest;
+use App\Stock;
+use App\Transaction;
 use Symfony\Component\HttpFoundation\Response;
 
 class AssetsController extends Controller
@@ -34,6 +36,13 @@ class AssetsController extends Controller
         if($request->hasFile('avatar') && $request->file('avatar')->isValid()){
             $asset->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
+        $stockData = [
+            'stock' => $request->quantity,
+            'asset_id' => $asset->id,
+            'team_id' => '1',
+        ];
+        $stock =Stock::where('id',$asset->id)->update(['current_stock' => $request->quantity]);
+        $transiction = Transaction::create($stockData);
         return redirect()->route('admin.assets.index')->with(['success' => 'Assets Created Successfully']);
     }
 
