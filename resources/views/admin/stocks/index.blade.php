@@ -28,15 +28,15 @@
             <table class=" table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center" width="12">
+                        <th class="text-center" width="5%">
                             {{ trans('cruds.stock.fields.s_no') }}
                         </th>
                      
-                        <th>
+                        <th width="10%">
                             {{ trans('cruds.stock.fields.asset') }}
                         </th>
 
-                        <th>
+                        <th width="10%">
                             Catgory
                         </th>
                         {{-- @admin
@@ -44,21 +44,21 @@
                                 Organization
                             </th>
                         @endadmin --}}
-                        <th class="text-center">
+                        <th class="text-center" width="10%">
                             {{ trans('cruds.stock.fields.current_stock') }}
                         </th>
-                        <th>
+                        <th width="10%">
                             Unit
                         </th>
-                        {{-- <th class="text-center">
-                            Add Stock
-                        </th> --}}
                         @user
-                            <th class="text-center">
+                            <th class="text-center" width="10%">
+                                Add Stock
+                            </th>
+                            <th class="text-center" width="10%">
                                 Remove Stock
                             </th>
                         @enduser
-                        <th class="text-center">
+                        <th class="text-center" width="10%">
                             {{ trans('cruds.stock.fields.action') }}   
                         </th>
                     </tr>

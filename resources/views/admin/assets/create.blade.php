@@ -73,6 +73,18 @@
                         <span class="help-block">{{ trans('cruds.asset.fields.name_helper') }}</span>
                     </div>
 
+
+                    <div class="form-group col-md-6">
+                        <label class="required" for="danger_level">Quantity</label>
+                        <input class="form-control " type="number" name="quantity" id="quantity" value="{{ old('quantity') }}">
+                        @if ($errors->has('quantity'))
+                            <div class="text-danger">
+                                {{ $errors->first('quantity') }}
+                            </div>
+                        @endif
+                        <span class="help-block"></span>
+                    </div>
+
                     <div class="form-group col-md-6">
                         <label class="required" for="name">Status</label>
                         <select class="form-control" id="status" name="status" value="{{old('status')}}">
@@ -101,7 +113,6 @@
                         <span class="help-block"></span>
                     </div>
 
-                    
                     <div class="form-group col-md-6">
                         <label for="danger_level">Image</label>
                         <input type="file" name="avatar" class="form-control">
