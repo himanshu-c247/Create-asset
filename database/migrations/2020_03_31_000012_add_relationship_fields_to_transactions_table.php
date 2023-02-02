@@ -13,8 +13,8 @@ class AddRelationshipFieldsToTransactionsTable extends Migration
             $table->foreign('asset_id', 'asset_fk_1230972')->references('id')->on('assets');
             $table->unsignedInteger('team_id')->nullable();
             $table->foreign('team_id', 'team_fk_1230977')->references('id')->on('teams');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id', 'user_fk_1233734')->references('id')->on('users');
+            // $table->unsignedInteger('user_id');
+            // $table->foreign('user_id', 'user_fk_1233734')->references('id')->on('users');
         });
 
     }

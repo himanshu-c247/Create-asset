@@ -129,7 +129,12 @@ $(document).on('click', '.assign-stock', function () {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
     },
     success: function (response) {
-      if (response.status == 'success') {
+      console.log(response.message);
+     
+      if (response.status == 'error') {
+        $('.' + 'current_stock' + '-error').html(response.message)
+        $('.' + 'current_stock' + '-error').show()
+      }else if (response.status == 'success') {
         $('#assignStockForm')[0].reset()
         $('.stock-table').html(response.output)
         $('.btn-close').trigger('click')

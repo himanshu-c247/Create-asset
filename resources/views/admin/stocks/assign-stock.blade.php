@@ -31,12 +31,8 @@
                 </div>
                 <div class="form-group">
                     <label for="current_stock">Assign Stock </label><small> (<sapn class="fw700">Note:</sapn> Your available stock is {{$stock->current_stock == null ? '0' : $stock->current_stock  }})</small>
-                    <input class="form-control {{ $errors->has('current_stock') ? 'is-invalid' : '' }}" type="number" name="current_stock" id="current_stock" value="{{ old('current_stock', '') }}" step="1">
-                    @if($errors->has('current_stock'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('current_stock') }}
-                        </div>
-                    @endif
+                    <input class="form-control" type="number" name="current_stock" id="current_stock" value="{{ old('current_stock', '') }}" step="1">
+                    <span class="text-danger error current_stock-error"></span>
                     <span class="help-block">{{ trans('cruds.stock.fields.current_stock_helper') }}</span>
                 </div>
                 <input class="form-control" type="hidden" name="id" value="{{$stock->id}}">

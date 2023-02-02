@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group search-group col-md-6">
                         <div class="search-box">
-                            <input type="text" id="search" name="search" value="{{ app('request')->input('search') }}" class="form-control" placeholder="Search by Display Name">
+                            <input type="text" id="search" name="search" value="{{ app('request')->input('search') }}" class="form-control" placeholder="Search...">
                             <i class="ri-search-line search-icon"></i>
                             <div class="search-via">
                             </div>
@@ -95,11 +95,6 @@ $(document).on('keyup', '#search', function () {
 $(document).on('change', '#category', function () {
     searchFilter();
 });
-
-// $(document).on('change', '#status_id', function () {
-//     searchFilter();
-// });
-
 
 </script>
 <script>
