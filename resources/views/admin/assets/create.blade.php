@@ -55,7 +55,7 @@
                     <div class="form-group col-md-6">
                         <label class="required" for="quantity">Quantity</label>
                         <input class="form-control " type="number" name="quantity" id="quantity"
-                            value="{{ old('quantity', 0) }}">
+                            value="{{ old('quantity') }}">
                         @if ($errors->has('quantity'))
                             <div class="text-danger">
                                 {{ $errors->first('quantity') }}
@@ -85,7 +85,7 @@
                     </div>
 
 
-                    <div class="form-group col-md-6">
+                    {{-- <div class="form-group col-md-6">
                         <label class="required" for="danger_level">Quantity</label>
                         <input class="form-control " type="number" name="quantity" id="quantity" value="{{ old('quantity') }}">
                         @if ($errors->has('quantity'))
@@ -94,7 +94,7 @@
                             </div>
                         @endif
                         <span class="help-block"></span>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group col-md-6">
                         <label class="required" for="name">Status</label>

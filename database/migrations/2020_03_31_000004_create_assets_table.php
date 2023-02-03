@@ -14,7 +14,7 @@ class CreateAssetsTable extends Migration
             $table->integer('category_id');
             $table->string('type');
             $table->string('unit')->nullable();
-            $table->enum('status', ['0','1'])->default('0')->comment('0:Inactive,1:Active');
+            $table->enum('status', ['0','1'])->default('1')->comment('0:Inactive,1:Active');
             $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

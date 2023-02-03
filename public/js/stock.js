@@ -79,12 +79,9 @@ $(document).on('click', '.update-stock', function () {
       },
       success: function (response) {
         if (response.status == 'error') {
-          $.each(response.error, function (index, value) {
-            console.log(index)
-            $('.' + index + '-error').html(value)
-            $('.' + index + '-error').show()
-          })
-        } else if (response.status == 'success') {
+          $('.' + 'current_stock' + '-error').html(response.message)
+          $('.' + 'current_stock' + '-error').show()
+        }else if (response.status == 'success') {
           $('#editStockForm')[0].reset()
           $('.stock-table').html(response.output)
           $('.btn-close').trigger('click')
@@ -153,6 +150,18 @@ $(document).on('click', '.assign-stock', function () {
     }
   })
 })
+
+//============= Assign-Stock-checked-value ================//
+$(document).on('change', '.checked', function () {
+        if($(this).val() == '2') {
+         $('.store-check').removeClass('d-none');           
+    }
+
+    else {
+         $('.store-check').addClass('d-none');   
+    }  
+});
+
 
 
 

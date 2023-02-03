@@ -23,10 +23,10 @@ class StoreAssetRequest extends FormRequest
             'name'         => 'required',
             'category_id'  => 'required',
             'type'         => 'required',
+            'quantity'     => 'required|integer',
             'status'       => 'required',
-            'quantity'       => 'required',
-            'unit'         => 'required',
             'danger_level' => 'required|integer',
+            'unit'         => 'required',
         ];
 
     }

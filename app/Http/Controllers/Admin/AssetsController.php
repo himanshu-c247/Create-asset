@@ -36,13 +36,14 @@ class AssetsController extends Controller
         if($request->hasFile('avatar') && $request->file('avatar')->isValid()){
             $asset->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
-        $stockData = [
+        $stock =Stock::where('id',$asset->id)->update(['current_stock' => $request->quantity]);
+        $transactionData = [
             'stock' => $request->quantity,
             'asset_id' => $asset->id,
-            'team_id' => '1',
+            'team_id' => 1,
+            'user_id' => 1,
         ];
-        $stock =Stock::where('id',$asset->id)->update(['current_stock' => $request->quantity]);
-        $transiction = Transaction::create($stockData);
+        $transiction = Transaction::create($transactionData);
         return redirect()->route('admin.assets.index')->with(['success' => 'Assets Created Successfully']);
     }
 
