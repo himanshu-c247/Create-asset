@@ -52,6 +52,17 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.asset.fields.name_helper') }}</span>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label class="required" for="quantity">Quantity</label>
+                        <input class="form-control " type="number" name="quantity" id="quantity"
+                            value="{{ old('quantity', 0) }}">
+                        @if ($errors->has('quantity'))
+                            <div class="text-danger">
+                                {{ $errors->first('quantity') }}
+                            </div>
+                        @endif
+                        <span class="help-block"></span>
+                    </div>
                 
                     <div class="form-group col-md-6">
                         <label class="required" for="name"a>Unit</label>

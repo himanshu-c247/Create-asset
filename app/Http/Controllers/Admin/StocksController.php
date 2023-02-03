@@ -32,7 +32,7 @@ class StocksController extends Controller
                     $q->where('name', 'like', '%' . $search . '%');
                 });
             }
-            $stocks = $stocks->where('team_id',null)->latest()->paginate(15); 
+            $stocks = $stocks->where('team_id',1)->latest()->paginate(15); 
             if ($request->ajax()) {
                 $stockSearch = view('admin.stocks.stocktable', compact('stocks'))->render();
                 return response()->json(['stockSearch' => $stockSearch]);
@@ -66,7 +66,7 @@ class StocksController extends Controller
             $addStock = $stock->current_stock + $request->current_stock;
             $stock = $stock->update(['current_stock' => $addStock]);
         }
-        $stocks = Stock::with('asset')->where('team_id',null)->latest()->paginate(15);
+        $stocks = Stock::with('asset')->where('team_id',1)->latest()->paginate(15);
         $stockTable = view('admin.stocks.stocktable',compact('stocks'))->render();
         return response()->json(['status' => 'success','message' => 'Stock added successfully !','output' => $stockTable]);
     }
@@ -85,7 +85,7 @@ class StocksController extends Controller
     {
         $stock->update($request->all());
         $stock->refresh();
-        $stocks = Stock::with('asset')->where('team_id',null)->latest()->paginate(15);
+        $stocks = Stock::with('asset')->where('team_id',1)->latest()->paginate(15);
         $stockTable = view('admin.stocks.stocktable',compact('stocks'))->render();
         return response()->json(['status' => 'success','message' => 'Stock Updated successfully !','output' => $stockTable]);
     }
@@ -164,7 +164,7 @@ class StocksController extends Controller
            $transaction=Transaction::create($transaction);
            $stock->refresh();
         }
-        $stocks = Stock::with('asset')->where('team_id',null)->latest()->paginate(15);
+        $stocks = Stock::with('asset')->where('team_id',1)->latest()->paginate(15);
         $stockTable = view('admin.stocks.stocktable',compact('stocks'))->render();
         return response()->json(['status' => 'success','message' => 'Stock added successfully !','output' => $stockTable]);
         }else{

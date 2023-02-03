@@ -16,7 +16,6 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'admin@admin.com',
                 'segment_id'     => '1',
                 'remember_token' => null,
-
             ],
         ];
 
