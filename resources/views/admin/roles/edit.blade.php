@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">
        
-       <h4>{{ trans('global.edit') }} {{ trans('cruds.role.title_singular') }}</h4>
+       <h4><i class="fas fa-briefcase mr-2"></i>{{ trans('global.edit') }} {{ trans('cruds.role.title_singular') }}</h4>
     </div>
 
     <div class="card-body">

@@ -123,6 +123,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    // to get pagination variable
+    'paginate'=>env('APP_PAGINATE'),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

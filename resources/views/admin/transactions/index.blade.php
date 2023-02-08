@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4>{{ trans('cruds.transaction.title_singular') }} {{ trans('global.list') }}</h4>
+        <h4><i class="fas fa-cogs mr-2"></i>{{ trans('cruds.transaction.title_singular') }}</h4>
         <div class="filter-search-block d-flex justify-content-between">
             <form method="GET" id="search-form" action="{{route('admin.transactions.index')}}" autocomplete="off">
                 <div class="row">
@@ -61,9 +61,9 @@
                     @include('admin.transactions.transactiontable')
                 </tbody>
             </table>
-            {{$transactions->links()}}
-            {{-- <div class="text-align-left">
-            </div> --}}
+            <div class="text-align-right">
+                {{$transactions->links()}}
+            </div>
         </div>
     </div>
 </div>

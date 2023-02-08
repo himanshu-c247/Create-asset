@@ -19,7 +19,7 @@ class AssetsController extends Controller
     public function index()
     {
         abort_if(Gate::denies('asset_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $assets = Asset::with('category')->latest()->get();
+        $assets = Asset::with('category')->latest()->paginate(config('app.paginate'));
         return view('admin.assets.index', compact('assets'));
     }
 

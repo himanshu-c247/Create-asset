@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>Assign Stock</h4>
+                <h4><i class="fas fa-cogs mr-2"></i>Assign Stock</h4>
                 <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

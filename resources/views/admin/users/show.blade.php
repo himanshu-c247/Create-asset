@@ -3,16 +3,11 @@
 
 <div class="card">
     <div class="card-header">
-       <h4>{{ trans('global.show') }} {{ trans('cruds.user.title') }}</h4>
+       <h4><i class="fas fa-user mr-2"></i>{{ trans('global.show') }} {{ trans('cruds.user.title') }}</h4>
     </div>
 
     <div class="card-body">
         <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.users.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>

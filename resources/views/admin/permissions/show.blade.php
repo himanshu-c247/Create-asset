@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h4>{{ trans('global.show') }} {{ trans('cruds.permission.title') }}</h4>
+        <h4><i class="fas fa-unlock mr-2"></i>{{ trans('global.show') }} {{ trans('cruds.permission.title') }}</h4>
     </div>
     <div class="card-body">
         <div class="form-group">

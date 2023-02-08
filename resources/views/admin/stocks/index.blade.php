@@ -3,7 +3,7 @@
 @include('sweetalert::alert')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4>{{ trans('cruds.stock.title_singular') }} {{ trans('global.list') }}</h4>
+        <h4><i class="fas fa-cogs mr-2"></i>{{ trans('cruds.stock.title_singular') }}</h4>
         @can('permission_create')
         <div class="filter-search-block d-flex justify-content-between">
             <form method="GET" id="search-form" action="{{route('admin.stocks.index')}}" autocomplete="off">
@@ -51,9 +51,9 @@
                             Unit
                         </th>
                         @user
-                            <th class="text-center" width="10%">
+                            {{-- <th class="text-center" width="10%">
                                 Add Stock
-                            </th>
+                            </th> --}}
                             <th class="text-center" width="10%">
                                 Remove Stock
                             </th>
@@ -67,6 +67,9 @@
                    @include('admin.stocks.stocktable')
                 </tbody>
             </table>
+            <div class="text-align-right">
+                {{$stocks->links()}}
+            </div>
         </div>
     </div>
 </div>

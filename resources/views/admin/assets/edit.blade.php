@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card">
-        <div class="card-header"><h4>{{ trans('global.edit') }} {{ trans('cruds.asset.title_singular') }}</h4></div>
+        
+        <div class="card-header"><h4><i class="fas fa-cogs mr-2"></i>{{ trans('global.edit') }} {{ trans('cruds.asset.title_singular') }}</h4></div>
         <div class="card-body">
             <form method="POST" action="{{ route('admin.assets.update', [$asset->id]) }}" enctype="multipart/form-data">
                 @method('PUT')

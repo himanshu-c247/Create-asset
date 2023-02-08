@@ -17,7 +17,7 @@ class TeamController extends Controller
     {
         abort_if(Gate::denies('team_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $teams = Team::latest()->get();
+        $teams = Team::latest()->paginate(config('app.paginate'));
 
         return view('admin.teams.index', compact('teams'));
     }

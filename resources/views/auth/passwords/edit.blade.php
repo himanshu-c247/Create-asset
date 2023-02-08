@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h4>{{ trans('global.change_password') }}</h4>
+        <h4><i class="fas fa-key mr-2"></i>{{ trans('global.change_password') }}</h4>
     </div>
 
     <div class="card-body">

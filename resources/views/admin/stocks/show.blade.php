@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4> History of {{$stock->asset->name ?? 'NA' }}</h4>
+        <h4> <i class="fas fa-cogs mr-2"></i>History of {{$stock->asset->name ?? 'NA' }}</h4>
         @can('permission_create')
         <div class="filter-search-block d-flex justify-content-between">
             <form method="GET" id="search-form" action="{{ route('admin.stocks.show', $stock->id) }}" autocomplete="off">

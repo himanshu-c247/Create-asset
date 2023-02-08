@@ -56,7 +56,7 @@ class TransactionsController extends Controller
                 $q->where('id',$category);
             });
         }
-         $transactions = $transactions->orderBy('id', 'DESC')->paginate(15); 
+         $transactions = $transactions->orderBy('id', 'DESC')->paginate(config('app.paginate')); 
         if ($request->ajax()) {
             $transactionSearch = view('admin.transactions.transactiontable', compact('transactions'))->render();
             return response()->json(['transactionSearch' => $transactionSearch]);

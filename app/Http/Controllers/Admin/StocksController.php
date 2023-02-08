@@ -20,8 +20,8 @@ class StocksController extends Controller
     {
 
         abort_if(Gate::denies('stock_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $teamId = auth()->user()->team_id;
-        if ($teamId == auth()->user()->id) {
+         $teamId = auth()->user()->team_id;
+        if ($teamId == '1') {
             $search = $request['search'];
             $stocks = Stock::with('asset');
             if ($request['search']) {
@@ -31,14 +31,14 @@ class StocksController extends Controller
                     $q->where('name', 'like', '%' . $search . '%');
                 });
             }
-            $stocks = $stocks->where('team_id', 1)->latest()->paginate(15);
+            $stocks = $stocks->where('team_id', 1)->latest()->paginate(config('app.paginate'));
             if ($request->ajax()) {
                 $stockSearch = view('admin.stocks.stocktable', compact('stocks'))->render();
                 return response()->json(['stockSearch' => $stockSearch]);
             }
             return view('admin.stocks.index', compact('stocks'));
         } else {
-            $stocks = Stock::with('asset')->where('team_id', $teamId)->latest()->get();
+            $stocks = Stock::with('asset')->where('team_id', $teamId)->latest()->paginate(config('app.paginate'));
             return view('admin.stocks.index', compact('stocks'));
         }
     }
@@ -85,16 +85,16 @@ class StocksController extends Controller
     {
         $sign = $request->stock == '1' ? '+' : '-';
         $stockAmount = $request->current_stock;
-        Transaction::create([
+        $tansaction=[
             'stock'    => $sign . $stockAmount,
             'asset_id' => $stock->asset->id,
             'team_id'  => $stock->team->id,
             'user_id'  => auth()->user()->id,
-        ]);
-
+        ];
         if ($request->stock == '1') {
             $stock->increment('current_stock', $stockAmount);
             $status = $stockAmount . ' items added to stock.';
+            Transaction::create($tansaction);
         }
         if ($request->stock == '2') {
             if (($stock->current_stock - $stockAmount) < 0) {
@@ -103,6 +103,8 @@ class StocksController extends Controller
 
             $stock->decrement('current_stock', $stockAmount);
             $status = $stockAmount . ' items removed from stock.';
+            Transaction::create($tansaction);
+
         }
         $stocks = Stock::with('asset')->where('team_id', 1)->latest()->paginate(15);
         $stockTable = view('admin.stocks.stocktable', compact('stocks'))->render();
@@ -112,25 +114,28 @@ class StocksController extends Controller
     public function show(Request $request, Stock $stock)
     {
         abort_if(Gate::denies('stock_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $stock = $stock->with('asset.transactions.team'); 
-        $search = $request['search'];
-        if ($request['search']) 
-        {
-            $stock = $stock->with([ 'asset.transactions.team' => function ($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%');
-            },])->whereHas('asset', function ($q) use ($search) {
-                $q->whereHas('transactions', function ($r) use ($search) {
-                    $r->whereHas('team', function ($s) use ($search) {
-                            $s->where('name', 'LIKE', '%'. $search .'%');
-                    });
-                });
-            });
-        }
-        $stock = $stock->first(); 
-        if ($request->ajax()) {
-            $historySearch = view('admin.stocks.stock-history-table', compact('stock'))->render();
-            return response()->json(['historySearch' => $historySearch]);
-        }
+        // $stock = $stock->with('asset.transactions.user.team'); 
+        // $search = $request['search'];
+        // if ($request['search']) 
+        // {
+        //     $stock = $stock->with([ 'asset.transactions.team' => function ($q) use ($search) {
+        //         $q->where('name', 'like', '%' . $search . '%');
+        //     },])->whereHas('asset', function ($q) use ($search) {
+        //         $q->whereHas('transactions', function ($r) use ($search) {
+        //             $r->whereHas('team', function ($s) use ($search) {
+        //                     $s->where('name', 'LIKE', '%'. $search .'%');
+        //             });
+        //         });
+        //     });
+        // }
+        // $stock = $stock->first(); 
+        // if ($request->ajax()) {
+        //     $historySearch = view('admin.stocks.stock-history-table', compact('stock'))->render();
+        //     return response()->json(['historySearch' => $historySearch]);
+        // }
+        // return view('admin.stocks.show', compact('stock'));
+
+        $stock->with('asset.transactions.user.team');
         return view('admin.stocks.show', compact('stock'));
     }
 

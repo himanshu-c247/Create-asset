@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <h4>{{ trans('cruds.role.title_singular') }} {{ trans('global.list') }}</h4>
+        <h4 class="title"><i class="fas fa-briefcase mr-2" data-feather="phone"></i>{{ trans('cruds.role.title_singular') }}</h4>
         @can('role_create')
             <div class="d-flex justify-content-between">
                 <a class="btn btn-primary" href="{{ route("admin.roles.create") }}">
@@ -14,11 +14,9 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover datatable datatable-Role">
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th width="10">
-                        </th>
                         <th width="10" class="text-center">
                             {{ trans('cruds.role.fields.s_no') }}
                         </th>
@@ -36,9 +34,6 @@
                 <tbody>
                     @foreach($roles as $key => $role)
                         <tr>
-                            <td>
-
-                            </td>
                             <td class="text-center">
                                 {{ $loop->index + 1 }}
                             </td>
@@ -75,6 +70,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="text-align-right">
+                {{$roles->links()}}
+            </div>
         </div>
     </div>
 </div>

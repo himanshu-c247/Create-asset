@@ -3,9 +3,8 @@
 
 <div class="card">
     <div class="card-header">
-        <h4>{{ trans('global.show') }} {{ trans('cruds.team.title') }}</h4>
+        <h4><i class="fas fa-users mr-2"></i>{{ trans('global.show') }} {{ trans('cruds.team.title') }}</h4>
     </div>
-
     <div class="card-body">
         <div class="form-group">
             <table class="table table-bordered table-striped">

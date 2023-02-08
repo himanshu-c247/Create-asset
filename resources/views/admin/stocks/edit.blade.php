@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h4>{{ trans('global.edit') }} {{ trans('cruds.stock.title_singular') }}</h4>
+            <h4><i class="fas fa-cogs mr-2"></i>{{ trans('global.edit') }} {{ trans('cruds.stock.title_singular') }}</h4>
           <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

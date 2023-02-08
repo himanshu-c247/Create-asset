@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header d-flex justify-content-between">
-            <h4>{{ trans('cruds.asset.title_singular') }} {{ trans('global.list') }}</h4>
+        <h4 class="title"><i class="fas fa-cogs mr-2"></i>{{ trans('cruds.asset.title_singular') }}</h4>
             @can('asset_create')
                 <div class="d-flex justify-content-between">
                     <a class="btn btn-primary" href="{{ route('admin.assets.create') }}">
@@ -114,6 +114,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="text-align-right">
+                    {{$assets->links()}}
+                </div>
             </div>
         </div>
     </div>

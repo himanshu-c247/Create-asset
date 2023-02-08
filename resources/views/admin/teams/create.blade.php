@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-       <h4>{{ trans('global.create') }} {{ trans('cruds.team.title_singular') }}</h4>
+       <h4><i class="fas fa-users mr-2"></i>{{ trans('global.create') }} {{ trans('cruds.team.title_singular') }}</h4>
     </div>
     <div class="card-body">
         <form method="POST" action="{{ route("admin.teams.store") }}" enctype="multipart/form-data">

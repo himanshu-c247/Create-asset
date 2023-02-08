@@ -38,7 +38,7 @@ class Stock extends Model
 
     public function asset()
     {
-        return $this->belongsTo(Asset::class, 'asset_id')->with('transactions');
+        return $this->belongsTo(Asset::class, 'asset_id');
 
     }
 

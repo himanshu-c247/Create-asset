@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <h4>{{ trans('cruds.permission.title_singular') }} {{ trans('global.list') }}</h4>
+        <h4 class="title"><i class="fas fa-unlock mr-2" data-feather="phone"></i>{{ trans('cruds.permission.title_singular') }}</h4>
         @can('permission_create')
             <div class="d-flex justify-content-between">
                 <a class="btn btn-primary" href="{{ route("admin.permissions.create") }}">
@@ -13,11 +13,9 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover datatable datatable-Permission">
+            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th width="10">
-                        </th>
                         <th width="10" class="text-center">
                             {{ trans('cruds.permission.fields.s_no') }}
                         </th>
@@ -32,9 +30,6 @@
                 <tbody>
                     @foreach($permissions as $key => $permission)
                         <tr>
-                            <td>
-
-                            </td>
                             <td class="text-center">
                                 {{ $loop->index + 1 }}
                             </td>
@@ -66,6 +61,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="text-align-right">
+                {{$permissions->links()}}
+            </div>
         </div>
     </div>
 </div>

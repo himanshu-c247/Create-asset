@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <h4>{{ trans('cruds.team.title_singular') }} {{ trans('global.list') }}</h4>
+        <h4 class="title"><i class="fas fa-users mr-2" data-feather="phone"></i>{{ trans('cruds.team.title_singular') }}</h4>
         @can('team_create')
             <div class="d-flex justify-content-between">
                 <a class="btn btn-primary" href="{{ route("admin.teams.create") }}">
@@ -13,12 +13,9 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Team">
+            <table class=" table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th width="10">
-
-                        </th>
                         <th width="10" class="text-center">
                             {{ trans('cruds.team.fields.s_no') }}
                         </th>
@@ -33,9 +30,6 @@
                 <tbody>
                     @foreach($teams as $key => $team)
                         <tr data-entry-id="{{ $team->id }}">
-                            <td>
-
-                            </td>
                             <td class="text-center">
                                 {{ $loop->index + 1 }}
                             </td>
@@ -69,6 +63,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="text-align-right">
+                {{$teams->links()}}
+            </div>
         </div>
     </div>
 </div>
