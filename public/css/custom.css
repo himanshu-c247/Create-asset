@@ -135,7 +135,7 @@ img.logo {
 }
 
 span.navbar-brand-full {
-    width: 3px;
+    width: 64px;
 }
 table.dataTable tbody td.select-checkbox:before, table.dataTable tbody td.select-checkbox:after, table.dataTable tbody th.select-checkbox:before, table.dataTable tbody th.select-checkbox:after {
     display: block;

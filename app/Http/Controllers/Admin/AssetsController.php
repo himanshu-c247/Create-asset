@@ -3,24 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
+use App\Stock;
 use App\Asset;
 use App\Category;
+use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
 use App\Http\Requests\MassDestroyAssetRequest;
-use App\Stock;
-use App\Transaction;
 use Symfony\Component\HttpFoundation\Response;
 
 class AssetsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('asset_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $assets = Asset::with('category')->latest()->paginate(config('app.paginate'));
-        return view('admin.assets.index', compact('assets'));
+        $search = $request['search'];
+        $assets = Asset::with('category');
+            if ($request['search']) {
+                $assets = $assets->where('name', 'like', '%' . $search . '%');
+            }
+            $assets = $assets->latest()->paginate(config('app.paginate'));
+            if ($request->ajax()) {
+                $assetSearch = view('admin.assets.asset-table', compact('assets'))->render();
+                return response()->json(['assetSearch' => $assetSearch]);
+            }
+            return view('admin.assets.index', compact('assets'));
     }
 
     public function create()

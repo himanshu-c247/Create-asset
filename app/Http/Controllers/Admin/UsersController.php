@@ -16,12 +16,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // return 'asdasd';
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $users = User::with('segment')->latest()->paginate(config('app.paginate'));
-
+        $search = $request['search'];
+        $users = User::with('segment');
+        if ($request['search']) {
+            $users = $users->where('name', 'like', '%' . $search . '%');
+        }
+        $users = $users->latest()->paginate(config('app.paginate'));
+        if ($request->ajax()) {
+            $userSearch = view('admin.users.user-table',compact('users'))->render();
+            return response()->json(['userSearch' => $userSearch]);
+        }
         return view('admin.users.index', compact('users'));
     }
 

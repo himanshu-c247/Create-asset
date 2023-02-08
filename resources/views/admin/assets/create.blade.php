@@ -70,8 +70,8 @@
                             <option disabled selected>Select Unit</option>
                             @forelse (App\Asset::Measurement as $key => $value)
                                 @if ($value)
-                                    <option value="{{ $value }}" {{ old('unit') == $value ? 'selected' : '' }}>
-                                        {{ ucfirst($value) ?? '' }}</option>
+                                    <option value="{{ $key }}" {{ old('unit') == $value ? 'selected' : '' }}>
+                                        {{ $key ?? '' }}    </option>
                                 @endif
                             @empty
                             @endforelse

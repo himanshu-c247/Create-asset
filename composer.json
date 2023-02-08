@@ -42,7 +42,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Helper/dateTimeHelper.php"
+            "app/Helper/dateTimeHelper.php",
+            "app/Helper/teamHelper.php"
         ],
         "classmap": [
             "database/seeds",

@@ -12,7 +12,7 @@
                 {{ $transaction->asset->category->name ?? 'NA' }}
             </td>
             <td class="text-capitalize">
-                {{ $transaction->user->name ?? 'NA' }}
+                {{ $transaction->team->name ?? 'NA' }}
             </td>
             <td class="text-center">
                 {{ $transaction->stock ?? 'NA' }}

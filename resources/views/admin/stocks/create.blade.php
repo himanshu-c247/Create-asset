@@ -22,6 +22,8 @@
                     <span class="text-danger error asset_id-error"></span>
                     <span class="help-block">{{ trans('cruds.stock.fields.asset_helper') }}</span>
                 </div>
+                <input class="form-control" type="hidden" name="team_id" id="team_id" value="{{ auth()->user()->team_id}}">
+
                 <div class="form-group">
                     <label for="current_stock">{{ trans('cruds.stock.fields.current_stock') }}</label>
                     <input class="form-control {{ $errors->has('current_stock') ? 'is-invalid' : '' }}" type="number" name="current_stock" id="current_stock" value="{{ old('current_stock', '') }}" step="1">

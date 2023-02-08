@@ -5,8 +5,21 @@
         <h4><i class="fas fa-cogs mr-2"></i>{{ trans('cruds.transaction.title_singular') }}</h4>
         <div class="filter-search-block d-flex justify-content-between">
             <form method="GET" id="search-form" action="{{route('admin.transactions.index')}}" autocomplete="off">
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="d-flex">
+                    @admin
+                    <div class="form-group">
+                        <select class="form-control" id="team" name="team">
+                            <option disabled selected>Search By Team</option>
+                            <option value="">All</option>
+                                @isset($teams)
+                                    @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}">{{ ucfirst($team->name) }}</option>
+                                    @endforeach
+                                @endisset
+                        </select>
+                    </div>
+                    @endadmin
+                    <div class="form-group">
                         <select class="form-control" id="category" name="category">
                             <option disabled selected>Search By Category</option>
                             <option value="">All</option>
@@ -17,7 +30,8 @@
                                 @endisset
                         </select>
                     </div>
-                    <div class="form-group search-group col-md-6">
+                    
+                    <div class="form-group search-group">
                         <div class="search-box">
                             <input type="text" id="search" name="search" value="{{ app('request')->input('search') }}" class="form-control" placeholder="Search...">
                             <i class="ri-search-line search-icon"></i>
@@ -25,6 +39,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </form>
             <a href=""><button type="button" class="reset-btn btn btn-primary ml-3" data-toggle="tooltip" data-placement="top" title="Reset"><i class="fa fa-refresh text-white"></i></button></a> 
@@ -47,7 +62,7 @@
                             Category
                         </th>
                         <th>
-                            {{ trans('cruds.transaction.fields.user') }}
+                            Organization
                         </th>
                         <th class="text-center">
                             {{ trans('cruds.transaction.fields.stock') }}
@@ -93,6 +108,10 @@ $(document).on('keyup', '#search', function () {
 });
 
 $(document).on('change', '#category', function () {
+    searchFilter();
+});
+
+$(document).on('change', '#team', function () {
     searchFilter();
 });
 

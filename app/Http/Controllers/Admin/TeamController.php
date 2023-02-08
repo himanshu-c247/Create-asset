@@ -13,12 +13,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TeamController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        
         abort_if(Gate::denies('team_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $teams = Team::latest()->paginate(config('app.paginate'));
-
+        $search = $request['search'];
+        $teams = Team::latest();
+        if ($request['search']) {
+            $teams = $teams->where('name', 'like', '%' . $search . '%');
+        }
+        $teams = $teams->paginate(config('app.paginate'));
+        if ($request->ajax()) {
+            $teamSearch = view('admin.teams.teamtable',compact('teams'))->render();
+            return response()->json(['teamSearch' => $teamSearch]);
+        }
         return view('admin.teams.index', compact('teams'));
     }
 

@@ -4,11 +4,23 @@
         <div class="card-header d-flex justify-content-between">
         <h4 class="title"><i class="fas fa-cogs mr-2"></i>{{ trans('cruds.asset.title_singular') }}</h4>
             @can('asset_create')
-                <div class="d-flex justify-content-between">
-                    <a class="btn btn-primary" href="{{ route('admin.assets.create') }}">
-                        {{ trans('global.add') }} {{ trans('cruds.asset.title_singular') }}
-                    </a>
-                </div>
+            <div class="filter-search-block d-flex justify-content-between">
+                <form method="GET" id="search-form" action="{{route('admin.assets.index')}}" autocomplete="off">
+                    <div class="row">
+                        <div class="form-group search-group">
+                            <div class="search-box">
+                                <input type="text" id="search" name="search" value="{{ app('request')->input('search') }}" class="form-control" placeholder="Search...">
+                                <i class="ri-search-line search-icon"></i>
+                                <div class="search-via">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <a href=""><button type="button" class="reset-btn btn btn-primary ml-3" data-toggle="tooltip" data-placement="top" title="Reset"><i class="fa fa-refresh text-white"></i></button></a> 
+                <a href="{{ route('admin.assets.create') }}"><button class="btn btn-primary stock-model ml-2">{{ trans('global.add') }} {{ trans('cruds.asset.title_singular') }}</button></a>
+            </div>     
+       
             @endcan
         </div>
 
@@ -17,101 +29,37 @@
                 <table class=" table table-bordered table-striped table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center" width="10">
+                            <th class="text-center" width="10" style="vertical-align: middle;">
                                 {{ trans('cruds.asset.fields.s_no') }}
                             </th>
-                            <th>
+                            <th style="vertical-align: middle;">
                                 {{ trans('cruds.asset.fields.name') }}
                             </th>
-                            <th>
+                            <th style="vertical-align: middle;">
                                 Category
                             </th>
-                            <th class="text-center">
+                            <th class="text-center" style="vertical-align: middle;">
                                 Image
                             </th>
-                            <th class="text-center">
+                            <th class="text-center" style="vertical-align: middle;">
                                 Type
                             </th>
-                            <th class="text-center">
+                            <th class="text-center" style="vertical-align: middle;">
                                 Status
                             </th>
                             {{-- <th ewi>
                             {{ trans('cruds.asset.fields.description') }}
                         </th> --}}
-                            <th class="text-center" width="10">
+                            <th class="text-center" width="10" style="vertical-align: middle;">
                                 Danger level
                             </th>
-                            <th class="text-center">
+                            <th class="text-center" style="vertical-align: middle;">
                                 {{ trans('cruds.asset.fields.action') }}
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($assets as $key => $asset)
-                            <tr data-entry-id="{{ $asset->id }}">
-                                <td class="text-center">
-                                    {{ $loop->index + 1 }}
-                                </td>
-                                <td class="text-capitalize">
-                                    {{ $asset->name ?? 'NA' }}
-                                </td>
-                                <td class="text-capitalize">
-                                    {{ $asset->category->name ?? 'NA' }}
-                                </td>
-                                {{-- {{dd($asset->getFirstMediaUrl('avatar'))}} --}}
-                                <td class="text-center">
-                                    @if ($asset->getFirstMediaUrl('avatar') != null)
-                                        <img src="{{ $asset->getFirstMediaUrl('avatar') }}" width="80px">
-                                    @else
-                                        <img src="{{ asset('no_image.png') }}" width="80px">
-                                    @endif
-                                </td>
-                                <td class="text-capitalize">
-                                    {{ $asset->type }}
-                                </td>
-                                <td class="text-center">
-                                    <form action="{{ route('admin.assets.updateStatus', $asset->id) }}" id="status"
-                                        method="POST">
-                                        @csrf
-                                        @method('post')
-                                        <input type="hidden" name="status" value={{ $asset->status }}>
-                                        <button class="btn btn-{{ $asset->status == '0' ? 'danger' : 'primary' }} status_confirm"
-                                            type="submit">{{ $asset->status == '0' ? 'Inactive' : 'Active' }}</button>
-                                    </form>
-                                </td>
-                                {{-- <td>
-                                {{ucfirst(Str::limit($asset->description,25) ?? 'NA') }}
-                            </td> --}}
-                                <td class="text-center">
-                                    {{ $asset->danger_level }}
-                                </td>
-                                <td class="text-center">
-                                    @can('asset_show')
-                                        <a class="btn btn-sm btn-default" href="{{ route('admin.assets.show', $asset->id) }}"
-                                            data-toggle="tooltip" data-placement="top" title="View">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                    @endcan
-
-                                    @can('asset_edit')
-                                        <a class="btn btn-sm btn-default" href="{{ route('admin.assets.edit', $asset->id) }}"
-                                            data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    @endcan
-
-                                    @can('asset_delete')
-                                        <form action="{{ route('admin.assets.destroy', $asset->id) }}" method="POST" style="display: inline-block;">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <button type="button" class="btn btn-sm btn-default delete_confirm" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
-                                        </form>
-                                    @endcan
-
-                                </td>
-
-                            </tr>
-                        @endforeach
+                    <tbody class="asset-table">
+                      @include('admin.assets.asset-table')
                     </tbody>
                 </table>
                 <div class="text-align-right">
@@ -123,6 +71,25 @@
 @endsection
 @section('scripts')
     @parent
+    <script>
+        /* =========== Leave History Search =========== */
+        var searchFilter = function() {
+            var form_action = $("#search-form").attr("action");
+            $.ajax({
+                url: form_action,
+                type: "GET",
+                dataType: 'json',
+                data: $('#search-form').serialize(),
+                success: function(data) {
+                    $('.asset-table').html(data.assetSearch);
+                },
+            });
+        }
+        $(document).on('keyup', '#search', function() {
+           
+            searchFilter();
+        });
+    </script>
     
     <script>
      

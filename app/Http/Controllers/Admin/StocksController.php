@@ -54,10 +54,13 @@ class StocksController extends Controller
 
     public function store(StoreStockRequest $request)
     {
+        // return $request;
         $stock = Stock::where('asset_id', $request->asset_id)->first();
         if ($stock) {
             $addStock = $stock->current_stock + $request->current_stock;
             $stock = $stock->update(['current_stock' => $addStock]);
+        }else{
+            Stock::create($request->all());
         }
         $data = [
             'stock' => $request['current_stock'],
@@ -100,7 +103,6 @@ class StocksController extends Controller
             if (($stock->current_stock - $stockAmount) < 0) {
                 return response()->json(['status' => 'error', 'message' => 'Not enough items in stock',]);
             }
-
             $stock->decrement('current_stock', $stockAmount);
             $status = $stockAmount . ' items removed from stock.';
             Transaction::create($tansaction);
@@ -179,11 +181,16 @@ class StocksController extends Controller
         if($request->current_stock <= $stock->current_stock) {
             $userStock = Stock::where('team_id', $request->team_id)->first();
             if ($userStock == null) {
-                $stock->decrement('current_stock', $stockAmount);
-                $stock = Stock::create($stockData);
-                $stock->refresh();
-                $status = $stockAmount . 'items added to stock.';
-                $transaction = Transaction::create($transaction);
+                if ($request->stock == '2') {
+                    return response()->json(['status' => 'error', 'message' => 'Stock not available']);
+                }else{
+                    $stock->decrement('current_stock', $stockAmount);
+                    $stock = Stock::create($stockData);
+                    $stock->refresh();
+                    $status = $stockAmount . 'items added to stock.';
+                    $transaction = Transaction::create($transaction);
+                }
+                
             }else {
                 if ($request->stock == '1') {
                     $stock->decrement('current_stock', $stockAmount);

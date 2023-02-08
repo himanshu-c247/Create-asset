@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\UpdateTransactionRequest;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Requests\MassDestroyTransactionRequest;
+use App\Team;
 
 /**
  * Class TransactionsController
@@ -34,8 +35,10 @@ class TransactionsController extends Controller
         abort_if(Gate::denies('transaction_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $search = $request['search'];
         $category = $request['category'];
+        $team = $request['team'];
         $categories= Category::get();
-        $transactions = Transaction::with('asset','user');
+        $teams = Team::get();
+        $transactions = Transaction::with('asset','user','team');
         if ($request['search']) 
         {
             $transactions = $transactions->with([ 'asset' => function ($q) use ($search) {
@@ -56,12 +59,20 @@ class TransactionsController extends Controller
                 $q->where('id',$category);
             });
         }
+        if ($request['team']) 
+        {
+            $transactions = $transactions->with([ 'team' => function ($q) use ($team) {
+                $q->where('id',$team);
+            },])->whereHas('team', function ($q) use ($team) {
+                $q->where('id',$team);
+            });
+        }
          $transactions = $transactions->orderBy('id', 'DESC')->paginate(config('app.paginate')); 
         if ($request->ajax()) {
             $transactionSearch = view('admin.transactions.transactiontable', compact('transactions'))->render();
             return response()->json(['transactionSearch' => $transactionSearch]);
         }
-        return view('admin.transactions.index', compact('transactions','categories'));
+        return view('admin.transactions.index', compact('transactions','categories','teams'));
     }
 
     /**

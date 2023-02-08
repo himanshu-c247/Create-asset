@@ -15,10 +15,10 @@ class Asset extends Model implements HasMedia
 
     public $table = 'assets';
     const Measurement = [
-        'meter',
-        'cenmeter',
-        'feet',
-        'quantity',
+        'm'   =>'meter',
+        'ft'  =>'feet',
+        'cm'  =>'cenmeter',
+        'Qty' =>'quantity',
     ];
 
     protected $dates = [

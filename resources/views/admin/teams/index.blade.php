@@ -4,11 +4,22 @@
     <div class="card-header d-flex justify-content-between">
         <h4 class="title"><i class="fas fa-users mr-2" data-feather="phone"></i>{{ trans('cruds.team.title_singular') }}</h4>
         @can('team_create')
-            <div class="d-flex justify-content-between">
-                <a class="btn btn-primary" href="{{ route("admin.teams.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.team.title_singular') }}
-                </a>
-            </div>
+        <div class="filter-search-block d-flex justify-content-between">
+            <form method="GET" id="search-form" action="{{route('admin.teams.index')}}" autocomplete="off">
+                <div class="row">
+                    <div class="form-group search-group">
+                        <div class="search-box">
+                            <input type="text" id="search" name="search" value="{{ app('request')->input('search') }}" class="form-control" placeholder="Search...">
+                            <i class="ri-search-line search-icon"></i>
+                            <div class="search-via">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <a href=""><button type="button" class="reset-btn btn btn-primary ml-3" data-toggle="tooltip" data-placement="top" title="Reset"><i class="fa fa-refresh text-white"></i></button></a> 
+            <a href="{{ route("admin.teams.create") }}"><button class="btn btn-primary stock-model ml-2">{{ trans('global.add') }} {{ trans('cruds.team.title_singular') }}</button></a>
+        </div>    
         @endcan
     </div>
     <div class="card-body">
@@ -27,40 +38,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($teams as $key => $team)
-                        <tr data-entry-id="{{ $team->id }}">
-                            <td class="text-center">
-                                {{ $loop->index + 1 }}
-                            </td>
-                            <td class="text-capitalize">
-                                {{ $team->name ?? 'NA' }}
-                            </td>
-                            <td class="text-center">
-                                @can('team_show')
-                                    <a class="btn btn-sm btn-default" href="{{ route('admin.teams.show', $team->id) }}" data-toggle="tooltip" data-placement="top" title="View">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                @endcan
-
-                                @can('team_edit')
-                                    <a class="btn btn-sm btn-default" href="{{ route('admin.teams.edit', $team->id) }}" data-toggle="tooltip" data-placement="top" title="Edit">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                @endcan
-
-                                @can('team_delete')
-                                    <form action="{{ route('admin.teams.destroy', $team->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                @endcan
-
-                            </td>
-
-                        </tr>
-                    @endforeach
+                <tbody class="team-table">
+                   @include('admin.teams.teamtable')
                 </tbody>
             </table>
             <div class="text-align-right">
@@ -75,6 +54,25 @@
 @endsection
 @section('scripts')
 @parent
+<script>
+    /* =========== Leave History Search =========== */
+    var searchFilter = function() {
+        var form_action = $("#search-form").attr("action");
+        $.ajax({
+            url: form_action,
+            type: "GET",
+            dataType: 'json',
+            data: $('#search-form').serialize(),
+            success: function(data) {
+                $('.team-table').html(data.teamSearch);
+            },
+        });
+    }
+    $(document).on('keyup', '#search', function() {
+       
+        searchFilter();
+    });
+</script>
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)

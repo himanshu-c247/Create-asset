@@ -32,7 +32,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <span class="navbar-brand-full">{{ ucfirst(auth()->user()->name) }}</span>
+            <span class="navbar-brand-full">{{ ucWords(getTeamName()) }}</span>
             {{-- <span class="navbar-brand-minimized">{{ trans('panel.site_title') }}</span> --}}
         </a>
         {{-- <a href="#"><img class="logo" alt="logo" src="{{ asset('logo.png') }}"/></a> --}}
