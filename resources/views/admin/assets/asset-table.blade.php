@@ -14,9 +14,9 @@
         
         <td class="text-center">
             @if ($asset->getFirstMediaUrl('avatar') != null)
-                <img src="{{ $asset->getFirstMediaUrl('avatar') }}" width="50px">
+                <img src="{{ $asset->getFirstMediaUrl('avatar') }}" width="60px">
             @else
-                <img src="{{ asset('no_image.png') }}" width="50px">
+                <img src="{{ asset('no_image.png') }}" width="60px">
             @endif
         </td>
         <td class="text-capitalize" style="vertical-align: middle;">

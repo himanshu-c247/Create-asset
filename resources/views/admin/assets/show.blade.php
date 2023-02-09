@@ -14,31 +14,53 @@
                             {{ trans('cruds.asset.fields.id') }}
                         </th>
                         <td class="">
-                            {{ $asset->id }}
+                            {{ $asset->id ?? 'NA'}}
                         </td>
                     </tr>
+                   
                     <tr>
                         <th>
                             {{ trans('cruds.asset.fields.name') }}
                         </th>
                         <td class="text-capitalize">
-                            {{ $asset->name }}
+                            {{ $asset->name ?? 'NA' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th style="vertical-align: middle;">
+                            Image
+                        </th>
+                        <td>
+                            @if ($asset->getFirstMediaUrl('avatar') != null)
+                                <img src="{{ $asset->getFirstMediaUrl('avatar') }}" width="80px">
+                            @else
+                                <img src="{{ asset('no_image.png') }}" width="80px">
+                            @endif
+                        </td>
+                    </tr>
+                    
                     <tr>
                         <th>
                             Category
                         </th>
                         <td class="text-capitalize">
-                            {{ $asset->category->name }}
+                            {{ $asset->category->name ?? 'NA' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
+                            Type
+                        </th>
+                        <td class="text-capitalize">
+                            {{ $asset->type ?? 'NA' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;">
                             {{ trans('cruds.asset.fields.description') }}
                         </th>
                         <td>
-                            {{ ucfirst($asset->description) ?? '' }}
+                            {{ ucfirst($asset->description) ?? 'NA' }}
                         </td>
                     </tr>
                     <tr>
@@ -46,7 +68,7 @@
                             Danger level
                         </th>
                         <td>
-                            {{ $asset->danger_level }}
+                            {{ $asset->danger_level ?? 'NA'}}
                         </td>
                     </tr>
                 </tbody>

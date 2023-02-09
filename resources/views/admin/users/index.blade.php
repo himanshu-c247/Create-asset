@@ -19,7 +19,7 @@
                         </div>
                     </form>
                     <a href=""><button type="button" class="reset-btn btn btn-primary ml-3" data-toggle="tooltip" data-placement="top" title="Reset"><i class="fa fa-refresh text-white"></i></button></a> 
-                    <a href="{{ route("admin.users.create") }}"><button class="btn btn-primary stock-model ml-2">{{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}</button></a>
+                    <a><button class="btn btn-primary stock-model ml-2 user-model" data-url="{{ route("admin.users.create") }}">{{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}</button></a>
                 </div>    
             </div>
         @endcan
@@ -63,68 +63,7 @@
 @endsection
 @section('scripts')
 @parent
-<script>
-    /* =========== Leave History Search =========== */
-    var searchFilter = function() {
-        var form_action = $("#search-form").attr("action");
-        $.ajax({
-            url: form_action,
-            type: "GET",
-            dataType: 'json',
-            data: $('#search-form').serialize(),
-            success: function(data) {
-                $('.user-table').html(data.userSearch);
-            },
-        });
-    }
-    $(document).on('keyup', '#search', function() {
-     
-        searchFilter();
-    });
-</script>
-<script>
-    $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('user_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.users.massDestroy') }}",
-    className: 'btn-danger',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
-      });
+<script src="{{ asset('js/user.js') }}"></script>
 
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
 
-        return
-      }
-
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
-
-  $.extend(true, $.fn.dataTable.defaults, {
-    // order: [[ 1, 'desc' ]],
-    pageLength: 100,
-  });
-  $('.datatable-User:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-        $($.fn.dataTable.tables(true)).DataTable()
-            .columns.adjust();
-    });
-})
-
-</script>
 @endsection

@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             PermissionRoleTableSeeder::class,
             TeamsTableSeeder::class,
+            SegmentSeeder::class,
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
             AssetsTableSeeder::class,
-            SegmentSeeder::class,
             CategorySeeder::class,
         ]);
 

@@ -16,18 +16,20 @@
             @endcan
     
             @can('team_edit')
-                <a class="btn btn-sm btn-default" href="{{ route('admin.teams.edit', $team->id) }}" data-toggle="tooltip" data-placement="top" title="Edit">
+                <a class="btn btn-sm btn-default edit-team" data-url="{{ route('admin.teams.edit', $team->id) }}" data-toggle="tooltip" data-placement="top" title="Edit">
                     <i class="fa fa-edit"></i>
                 </a>
             @endcan
     
             @can('team_delete')
-                <form action="{{ route('admin.teams.destroy', $team->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
-                </form>
-            @endcan
+            <form id="teamDelete"  style="display: inline-block;">
+                @csrf
+                @method('Delete')
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <button type="button" class="btn btn-sm btn-default team-delete" data-url="{{ route('admin.teams.destroy', $team->id) }}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+            </form>
+        @endcan
     
         </td>
     

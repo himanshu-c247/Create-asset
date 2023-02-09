@@ -158,6 +158,7 @@ class StocksController extends Controller
     }
     public function assignStock($id)
     {
+        // abort_if(Gate::denies('assign_stock'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $stock = Stock::with('asset')->find($id);
         $teams = Team::where('id', '!=', 1)->get();
         $assignStockModel = view('admin.stocks.assign-stock', compact('teams', 'stock'))->render();

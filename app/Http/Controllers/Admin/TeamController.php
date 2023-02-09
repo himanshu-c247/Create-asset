@@ -33,29 +33,33 @@ class TeamController extends Controller
     public function create()
     {
         abort_if(Gate::denies('team_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.teams.create');
+        $teamModel = view('admin.teams.create')->render();
+        return response()->json(['status' => 'success', 'output' => $teamModel]);
+        // return view('admin.teams.create');
     }
 
     public function store(StoreTeamRequest $request)
     {
         $team = Team::create($request->all());
-
-        return redirect()->route('admin.teams.index')->with(['success' => 'Team Created Successfully']);
+        $teams = Team::latest()->paginate(config('app.paginate'));
+        $teamTable = view('admin.teams.teamtable', compact('teams'))->render();
+        return response()->json(['status' => 'success', 'message' => 'Organization added successfully !', 'output' => $teamTable]);
+        // return redirect()->route('admin.teams.index')->with(['success' => 'Team Created Successfully']);
     }
 
     public function edit(Team $team)
     {
-        abort_if(Gate::denies('team_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.teams.edit', compact('team'));
+        abort_if(Gate::denies('team_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');      
+        $teamModel = view('admin.teams.edit', compact('team'))->render();
+        return response()->json(['status' => 'success', 'output' => $teamModel]);
     }
 
     public function update(UpdateTeamRequest $request, Team $team)
     {
         $team->update($request->all());
-
-        return redirect()->route('admin.teams.index')->with(['success' => 'Stock Updated Successfully']);
+        $teams = Team::latest()->paginate(config('app.paginate'));
+        $teamTable = view('admin.teams.teamtable', compact('teams'))->render();
+        return response()->json(['status' => 'success', 'message' => 'Organization updated successfully !', 'output' => $teamTable]);
 
     }
 
@@ -69,11 +73,10 @@ class TeamController extends Controller
     public function destroy(Team $team)
     {
         abort_if(Gate::denies('team_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $team->delete();
-
-        return back()->with(['success' => 'Stock Deleted Successfully']);
-
+        $teams = Team::latest()->paginate(config('app.paginate'));
+        $teamTable = view('admin.teams.teamtable', compact('teams'))->render();
+        return response()->json(['status' => 'success', 'message' => 'Organization delete successfully !', 'output' => $teamTable]);
     }
 
     public function massDestroy(MassDestroyTeamRequest $request)

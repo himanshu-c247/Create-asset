@@ -1,37 +1,30 @@
-@extends('layouts.admin')
-@section('content')
-
-<div class="card">
-    <div class="card-header">
-       <h4><i class="fas fa-users mr-2"></i>{{ trans('global.edit') }} {{ trans('cruds.team.title_singular') }}</h4>
-    </div>
-
-    <div class="card-body">
-        <form method="POST" action="{{ route("admin.teams.update", [$team->id]) }}" enctype="multipart/form-data">
+<!------------Edit-Team-Modal-------------->
+<div class="modal fade" id="editTeamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4><i class="fas fa-users mr-2"></i>{{ trans('global.edit') }} {{ trans('cruds.team.title_singular') }}</h4>
+          <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="editTeamForm" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.team.fields.name') }}</label>
                 <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $team->name) }}">
-                @if($errors->has('name'))
-                    <div class="text-danger">
-                        {{ $errors->first('name') }}
-                    </div>
-                @endif
+                <span class="text-danger error name-error"></span>
                 <span class="help-block">{{ trans('cruds.team.fields.name_helper') }}</span>
             </div>
-            <div class="form-group">
-                <button class="btn btn-primary" type="submit">
-                    {{ trans('global.save') }}
+            <div class="form-group text-center">
+                <button class="btn btn-primary update-team" type="button" data-url="{{ route("admin.teams.update", [$team->id]) }}">
+                    {{ trans('global.update') }}
                 </button>
-                <a class="btn btn-default" href="{{ route("admin.teams.index") }}">
-                    {{ trans('global.cancel') }}
-                </a>
             </div>
-        </form>
+            </form>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-@endsection
+  </div>

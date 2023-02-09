@@ -18,7 +18,6 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
-        // return 'asdasd';
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $search = $request['search'];
         $users = User::with('segment');
@@ -42,8 +41,8 @@ class UsersController extends Controller
         $teams = Team::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $segments = Segment::all();
-        
-        return view('admin.users.create', compact('roles', 'teams','segments'));
+        $userModel = view('admin.users.create',compact('roles', 'teams','segments'))->render();
+        return response()->json(['status' => 'success', 'output' => $userModel]); 
     }
 
     public function store(StoreUserRequest $request)

@@ -40,6 +40,9 @@
                         <label class="required" for="name">Type</label>
                         <select class="form-control" id="type" name="type">
                             <option disabled selected>Select Type</option>
+                            <option value="shirt"{{ old('type') == 'shirt' ? 'selected' : '' }}>shirt</option>
+                            <option value="t-shirt"{{ old('type') == 't-shirt' ? 'selected' : '' }}>t-shirt</option>
+                            <option value="suit"{{ old('type') == 'suit' ? 'selected' : '' }}>suit</option>
                             <option value="fabric"{{ old('type') == 'fabric' ? 'selected' : '' }}>Fabric</option>
                             <option value="button"{{ old('type') == 'button' ? 'selected' : '' }}>Button</option>
                             <option value="zipper"{{ old('type') == 'zipper' ? 'selected' : '' }}>Zipper</option>

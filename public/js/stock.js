@@ -163,5 +163,57 @@ $(document).on('change', '.checked', function () {
 });
 
 
+    /* ===========  stock Search =========== */
+    var searchFilter = function() {
+        var form_action = $("#search-form").attr("action");
+        $.ajax({
+            url: form_action,
+            type: "GET",
+            dataType: 'json',
+            data: $('#search-form').serialize(),
+            success: function(data) {
+                $('.stock-table').html(data.stockSearch);
+            },
+        });
+    }
+    $(document).on('keyup', '#search', function() {
+        searchFilter();
+    });
+
+    /* =========== remove stock =========== */
+
+    $(documnet).on('click','.remove-stock',function() {
+        var url = $(this).attr('data-url');
+        var value = $(this).parents("tr").find('.stock-value').val();
+        var currentStock = $(this).attr('data-current-stock');
+        if (currentStock - value < 0) {
+            Swal.fire({
+                title: 'Opss...',
+                text: "Not enough items in stock!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Inform Admin!'
+            })
+        }else {
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: $('#removeStockForm').serialize(),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function(data) {
+                    toastr.success(data.message, 'Success!', {
+                            timeOut: '4000',
+                        }),
+                        location.reload();
+                }
+            })
+        }
+    });
+
+
 
 

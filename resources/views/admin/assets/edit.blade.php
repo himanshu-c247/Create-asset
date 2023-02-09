@@ -44,6 +44,9 @@
                         <label class="required" for="name">Type</label>
                         <select class="form-control" id="type" name="type">
                             <option disabled selected>Select Type</option>
+                            <option value="shirt" {{$asset->type == "shirt" ? 'selected' : '' }}>shirt</option>
+                            <option value="t-shirt" {{$asset->type == "t-shirt" ? 'selected' : '' }}>t-shirt</option>
+                            <option value="suit" {{$asset->type == "suit" ? 'selected' : '' }}>suit</option>
                             <option value="fabric" {{$asset->type == "fabric" ? 'selected' : '' }}>Fabric</option>
                             <option value="button" {{$asset->type == "button" ? 'selected' : '' }}>Button</option>
                             <option value="zipper" {{$asset->type == "zipper" ? 'selected' : '' }}>Zipper</option>
@@ -62,8 +65,8 @@
                             <option disabled selected>Select Unit</option>
                             @forelse (App\Asset::Measurement as $key => $value)
                                 @if ($value)
-                                    <option value="{{ $value }}" {{ $value == $asset->unit ? 'selected' : '' }}>
-                                        {{ ucfirst($value) ?? '' }}</option>
+                                    <option value="{{ $key }}" {{ $key == $asset->unit ? 'selected' : '' }}>
+                                        {{ ucfirst($key) ?? '' }}</option>
                                 @endif
                             @empty
                             @endforelse
