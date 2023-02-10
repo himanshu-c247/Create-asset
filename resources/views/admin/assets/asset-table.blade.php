@@ -6,7 +6,7 @@
             {{ $loop->index + 1 }}
         </td>
         <td class="text-capitalize" style="vertical-align: middle;">
-            {{ $asset->name ?? 'NA' }}
+         <a  data-toggle="tooltip" data-placement="left" title="{{$asset->name ?? 'NA'}}">{{ Str::limit($asset->name , 45) ?? 'NA' }}</a>
         </td>
         <td class="text-capitalize" style="vertical-align: middle;">
             {{ $asset->category->name ?? 'NA' }}
@@ -14,13 +14,13 @@
         
         <td class="text-center">
             @if ($asset->getFirstMediaUrl('avatar') != null)
-                <img src="{{ $asset->getFirstMediaUrl('avatar') }}" width="60px">
+                <img src="{{ $asset->getFirstMediaUrl('avatar') }}" width="50px" height="60px">
             @else
                 <img src="{{ asset('no_image.png') }}" width="60px">
             @endif
         </td>
         <td class="text-capitalize" style="vertical-align: middle;">
-            {{ $asset->type }}
+            {{ $asset->type ?? 'NA' }}
         </td>
         <td class="text-center" style="vertical-align: middle;">
             <form action="{{ route('admin.assets.updateStatus', $asset->id) }}" id="status"

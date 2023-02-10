@@ -18,9 +18,9 @@ class AssetsTableSeeder extends Seeder
         $assets = [
             [
                 'id'            => 1,
-                'name'          => 'Smartees Men Color Blocked',
+                'name'          => 'BAND COLLAR APPLIQUE SHIRT - OLIVE STRIPE / CHECK',
                 'category_id'   => 1,
-                'type'          => 't-shirt',
+                'type'          => 'shirt',
                 'unit'          => 'Qty',
                 'status'        => '1',
                 'description'   => 'This cool t-shirt for men is made from Cotton which is pre-shrunk and bio-washed for longevity is a perfect treat for Men & Boys who like to move out in style. This tshirt is available in 3 sizes - M L XL.',
@@ -28,9 +28,9 @@ class AssetsTableSeeder extends Seeder
             ],
             [
                 'id'            => 2,
-                'name'          => 'TORTUGA Men Washed Casual Grey Denim Shirt',
+                'name'          => 'TURTLE NECK T-SHIRT - NAVY',
                 'category_id'   => 1,
-                'type'          => 'shirt',
+                'type'          => 't-shirt',
                 'unit'          => 'Qty',
                 'status'        => '1',
                 'description'   => 'This shirt is made from premium quality material. Durable quality with a stylish look makes it a must have on your shelves.',
@@ -38,7 +38,7 @@ class AssetsTableSeeder extends Seeder
             ],
             [
                 'id'            => 3,
-                'name'          => 'Unstitched Crepe Salwar Suit Material Printed',
+                'name'          => 'BACK GATHER JACKET CO ORD - OLIVE',
                 'category_id'   => 1,
                 'type'          => 'suit',
                 'unit'          => 'Qty',
@@ -66,10 +66,10 @@ class AssetsTableSeeder extends Seeder
             $asset = Asset::create($asset)->each(function($avtar,$key){
                 // $imageUrl = 'https://source.unsplash.com/random';
                 $url = [
-                     public_path('/images/s-479634-bewakoof-original-imaghauygbdsg3dm.webp'),
-                     public_path('/images/tortuga-men-washed-casual-grey-denim-shirt-product-images-rvkaooxqv0-0-202205092228.jpg'),
-                     public_path('/images/2-m-unstitched-inithi-1458-beige-2-35-m-salwar-suit-material-original-imag975dkmcmw7dt.webp'),
-                     public_path('/images/material.jpeg'),
+                     public_path('/images/1.webp'),
+                     public_path('/images/2.webp'),
+                     public_path('/images/3.webp'),
+                     public_path('/images/4.jpg'),
                   ] ;
                 $avtar->addMedia($url[$key])->preservingOriginal()->toMediaCollection('avatar');
             });
