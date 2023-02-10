@@ -1,15 +1,10 @@
 <div class="sidebar">
     <nav class="sidebar-nav">
-
         <ul class="nav">
             @can('user_management_access','team_access')
             {{-- <li class="nav-item">
-                <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">
-                    <i class="fa-fw fas fa-users nav-icon">
-
-                    </i>
-                    Dashboard
-                </a>
+                <a href="{{ route("admin.dashboard.index") }}" class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                    <i class="fa-fw fas fa-home nav-icon"></i>Dashboard</a>
             </li> --}}
             <li class="nav-item">
                 <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">

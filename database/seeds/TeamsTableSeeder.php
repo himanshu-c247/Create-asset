@@ -15,9 +15,8 @@ class TeamsTableSeeder extends Seeder
     {
         $teams =[
          ['name' => 'wearthree'],   
-         ['name' => 'fation virus'],
-         ['name' => 'a to z'],
-         ['name' => 'sundaram tailor'],
+         ['name' => 'Retailer'],
+         ['name' => 'Exhibitor'],
         ];
         foreach ($teams as $team) {
         Team::Create($team);

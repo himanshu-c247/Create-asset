@@ -12,8 +12,8 @@ Auth::routes(['register' => false]);
 // Admin
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+    Route::get('dashboard','DashboardController@index')->name('dashboard.index');
     Route::redirect('/', '/login')->name('home');
-    // Route::get('dashboard', 'HomeController@index')->name('home.index');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');

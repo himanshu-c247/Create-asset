@@ -63,7 +63,7 @@
                 <nav aria-label="breadcrumb">
                  <ol class="breadcrumb my-0 ms-2">
                   <li class="breadcrumb-item">
-                   <a href="" class=""> <span>Dashboard</span></a>
+                   <a href="{{ route("admin.dashboard.index") }}" class=""> <span>Dashboard</span></a>
                   </li>
                   <li class="breadcrumb-item active"><span>{{ucfirst(Request::segment(2));}}</span></li>
                  </ol>
@@ -117,124 +117,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script>
-        $(function() {
-            let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
-            let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
-            let excelButtonTrans = '{{ trans('global.datatables.excel') }}'
-            let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
-            let printButtonTrans = '{{ trans('global.datatables.print') }}'
-            let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}'
-            let selectAllButtonTrans = '{{ trans('global.select_all') }}'
-            let selectNoneButtonTrans = '{{ trans('global.deselect_all') }}'
-
-            let languages = {
-                'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
-            };
-
-            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
-                className: 'btn'
-            })
-            $.extend(true, $.fn.dataTable.defaults, {
-                language: {
-                    url: languages['{{ app()->getLocale() }}']
-                },
-                columnDefs: [{
-                    orderable: false,
-                    className: 'select-checkbox',
-                    targets: 0
-                }, {
-                    orderable: false,
-                    searchable: false,
-                    targets: -1
-                }],
-                select: {
-                    style: 'multi+shift',
-                    selector: 'td:first-child'
-                },
-                order: [],
-                scrollX: true,
-                pageLength: 100,
-                dom: 'lBfrtip<"actions">',
-                buttons: [
-                    // {
-                    //       extend: 'selectAll',
-                    //       className: 'btn-primary',
-                    //       text: selectAllButtonTrans,
-                    //       exportOptions: {
-                    //           columns: ':visible'
-                    //       }
-                    //   },
-                    // {
-                    //     extend: 'selectNone',
-                    //     className: 'btn-primary',
-                    //     text: selectNoneButtonTrans,
-                    //     exportOptions: {
-                    //         columns: ':visible'
-                    //     }
-                    // },
-                    // {
-                    //     extend: 'copy',
-                    //     className: 'btn-default',
-                    //     text: copyButtonTrans,
-                    //     exportOptions: {
-                    //         columns: ':visible'
-                    //     }
-                    // },
-                    {
-                        extend: 'csv',
-                        className: 'btn-default',
-                        text: csvButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn-default',
-                        text: excelButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    // {
-                    //     extend: 'pdf',
-                    //     className: 'btn-default',
-                    //     text: pdfButtonTrans,
-                    //     exportOptions: {
-                    //         columns: ':visible'
-                    //     }
-                    // },
-                    // {
-                    //     extend: 'print',
-                    //     className: 'btn-default',
-                    //     text: printButtonTrans,
-                    //     visible: false,
-                    //     exportOptions: {
-                    //       columns: ':visible'
-                    //     }
-                        
-                    // },
-                    {
-                        extend: 'colvis',
-                        className: 'btn-default',
-                        text: colvisButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    }
-                ]
-            });
-
-            $.fn.dataTable.ext.classes.sPageButton = '';
-        });
-    </script>
     @yield('scripts')
       {{-- toastr js --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script>
       $(document).ready(function() {
           toastr.options.timeOut = 5000;

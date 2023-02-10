@@ -36,7 +36,7 @@ $(document).on('click', '.asset-delete', function () {
 })
 
 
-/* =========== Leave History Search =========== */
+/* =========== Asset Search =========== */
 var searchFilter = function () {
     var form_action = $("#search-form").attr("action");
     $.ajax({
@@ -54,9 +54,7 @@ $(document).on('keyup', '#search', function () {
     searchFilter();
 });
 
-
-
-
+/* =========== Asset Status Search =========== */
 $(document).on('click','.status_confirm',function (event) {
     var form = $(this).closest("form");
     var name = $(this).data("name");
