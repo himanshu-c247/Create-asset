@@ -32,24 +32,22 @@
                             {{ trans('cruds.stock.fields.s_no') }}
                         </th>
                      
-                        <th width="10%">
+                        <th width="30%">
                             {{ trans('cruds.stock.fields.asset') }}
                         </th>
 
                         <th width="10%">
                             Catgory
                         </th>
-                        {{-- @admin
-                            <th>
-                                Organization
-                            </th>
-                        @endadmin --}}
+                     
                         <th class="text-center" width="10%">
                             {{ trans('cruds.stock.fields.current_stock') }}
                         </th>
-                        <th width="10%">
+                        @role('user')
+                        <th width="10%" class="text-center">
                             Unit
                         </th>
+                        @endrole
                         @user
                             {{-- <th class="text-center" width="10%">
                                 Add Stock
