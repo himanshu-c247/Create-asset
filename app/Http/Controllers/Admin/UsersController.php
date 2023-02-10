@@ -41,8 +41,8 @@ class UsersController extends Controller
         $teams = Team::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $segments = Segment::all();
-        $userModel = view('admin.users.create',compact('roles', 'teams','segments'))->render();
-        return response()->json(['status' => 'success', 'output' => $userModel]); 
+        
+        return view('admin.users.create', compact('roles', 'teams','segments'));
     }
 
     public function store(StoreUserRequest $request)
@@ -92,8 +92,9 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $user->delete();
-
-        return back()->with(['success' => 'Stock Deleted Successfully']);
+        $users = User::with('segment')->paginate(config('app.paginate'));
+        $userTable = view('admin.users.user-table', compact('users'))->render();
+        return response()->json(['status' => 'success', 'message' => 'User delete successfully !', 'output' => $userTable]);
         
     }
 

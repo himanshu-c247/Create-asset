@@ -19,7 +19,7 @@
                         </div>
                     </form>
                     <a href=""><button type="button" class="reset-btn btn btn-primary ml-3" data-toggle="tooltip" data-placement="top" title="Reset"><i class="fa fa-refresh text-white"></i></button></a> 
-                    <a><button class="btn btn-primary stock-model ml-2 user-model" data-url="{{ route("admin.users.create") }}">{{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}</button></a>
+                    <a href="{{ route("admin.users.create") }}"><button class="btn btn-primary stock-model ml-2">{{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}</button></a>
                 </div>    
             </div>
         @endcan
@@ -64,6 +64,4 @@
 @section('scripts')
 @parent
 <script src="{{ asset('js/user.js') }}"></script>
-
-
 @endsection

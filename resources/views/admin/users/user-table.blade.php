@@ -34,10 +34,12 @@
             @endcan
     
             @can('user_delete')
-                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                <form id="userDelete" style="display: inline-block;">
+                    @csrf
+                    @method('Delete')
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>                                       
+                    <button type="button" class="btn btn-sm btn-default user-delete" data-url="{{ route('admin.users.destroy', $user->id) }}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>                                       
                 </form>
             @endcan
         </td>

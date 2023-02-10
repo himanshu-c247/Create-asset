@@ -55,10 +55,12 @@
             @endcan
     
             @can('asset_delete')
-                <form action="{{ route('admin.assets.destroy', $asset->id) }}" method="POST" style="display: inline-block;">
+                <form id="assetDelete" style="display: inline-block;">
+                    @csrf
+                    @method('Delete')
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="button" class="btn btn-sm btn-default delete_confirm" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                    <button type="button" class="btn btn-sm btn-default asset-delete" data-url="{{ route('admin.assets.destroy', $asset->id) }}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
                 </form>
             @endcan
     

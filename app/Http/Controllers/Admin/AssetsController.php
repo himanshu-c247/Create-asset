@@ -84,7 +84,9 @@ class AssetsController extends Controller
     {
         abort_if(Gate::denies('asset_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $asset->delete();
-        return back()->with(['success' => 'Assets Deleted Successfully']);
+        $assets = Asset::with('category')->latest()->paginate(config('app.paginate'));
+        $assetTable = view('admin.assets.asset-table', compact('assets'))->render();
+        return response()->json(['status' => 'success', 'message' => 'Asset delete successfully !', 'output' => $assetTable]);
     }
 
     public function massDestroy(MassDestroyAssetRequest $request)

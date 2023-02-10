@@ -3,6 +3,14 @@
 
         <ul class="nav">
             @can('user_management_access','team_access')
+            {{-- <li class="nav-item">
+                <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">
+                    <i class="fa-fw fas fa-users nav-icon">
+
+                    </i>
+                    Dashboard
+                </a>
+            </li> --}}
             <li class="nav-item">
                 <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">
                     <i class="fa-fw fas fa-users nav-icon">
