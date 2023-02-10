@@ -30,7 +30,7 @@
                 <input type="hidden" name="status" value={{ $asset->status }}>
                 
                 <a class="status_confirm"
-                    type="button"><span class="badge badge-{{ $asset->status == '0' ? 'danger' : 'primary' }}">{{ $asset->status == '0' ? 'Inactive' : 'Active' }}</span></a>
+                    type=""><span class="badge badge-{{ $asset->status == '0' ? 'danger' : 'primary' }}">{{ $asset->status == '0' ? 'Inactive' : 'Active' }}</span></a>
             </form>
         </td>
         {{-- <td>
