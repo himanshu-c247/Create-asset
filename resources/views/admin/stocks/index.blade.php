@@ -43,11 +43,10 @@
                         <th class="text-center" width="10%">
                             {{ trans('cruds.stock.fields.current_stock') }}
                         </th>
-                        @role('user')
+                        
                         <th width="10%" class="text-center">
                             Unit
                         </th>
-                        @endrole
                         @user
                             {{-- <th class="text-center" width="10%">
                                 Add Stock
@@ -56,7 +55,7 @@
                                 Remove Stock
                             </th>
                         @enduser
-                        <th class="text-center" width="10%">
+                        <th class="text-center" width="15%">
                             {{ trans('cruds.stock.fields.action') }}   
                         </th>
                     </tr>

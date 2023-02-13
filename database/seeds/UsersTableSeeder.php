@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'retailer@admin.com',
                 'password'       => '$2y$10$KjopsXqbCq1NrrGYJe7rr./68LzZSGCas5XxBHHbG.9AF4mc3GPR.',
                 'segment_id'     => '2',
-                'team_id'        => 3,
+                'team_id'        => 2,
                 'remember_token' => null,
             ],
             [

@@ -37,6 +37,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Stocks
     //Route::delete('stocks/destroy', 'StocksController@massDestroy')->name('stocks.massDestroy');
+    Route::get('request', 'StocksController@requestList')->name('stocks.request');
+    Route::get('request/accept/{id}', 'StocksController@acceptRequest')->name('stocks.requestAccept');
+    Route::get('stocks/request/{id}', 'StocksController@requestStock')->name('stocks.requestStock');
+    Route::post('stocks/request/store', 'StocksController@requestStockStore')->name('stocks.requestStockStore');
     Route::get('stocks/assign/{id}', 'StocksController@assignStock')->name('stocks.assignStock');
     Route::post('stocks/assign/store', 'StocksController@assignStockStore')->name('stocks.assignStockStore');
     Route::resource('stocks', 'StocksController');

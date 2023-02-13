@@ -37,6 +37,7 @@ class ComposerStaticInitcd9b0a339545dfe87a9517d1cde5ab46
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         'f472b61cf207c60b83340a82e7f3aba6' => __DIR__ . '/../..' . '/app/Helper/dateTimeHelper.php',
         '31f5f7b6e980ab6e442284949511bf3c' => __DIR__ . '/../..' . '/app/Helper/teamHelper.php',
+        '2c232a7ae7599e88a26ea865c54400db' => __DIR__ . '/../..' . '/app/Helper/requestCountHelper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -677,6 +678,7 @@ class ComposerStaticInitcd9b0a339545dfe87a9517d1cde5ab46
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\AssetsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AssetsController.php',
+        'App\\Http\\Controllers\\Admin\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DashboardController.php',
         'App\\Http\\Controllers\\Admin\\PermissionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PermissionsController.php',
         'App\\Http\\Controllers\\Admin\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RolesController.php',
         'App\\Http\\Controllers\\Admin\\StocksController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/StocksController.php',
@@ -750,6 +752,7 @@ class ComposerStaticInitcd9b0a339545dfe87a9517d1cde5ab46
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\Segment' => __DIR__ . '/../..' . '/app/Segment.php',
         'App\\Stock' => __DIR__ . '/../..' . '/app/Stock.php',
+        'App\\StockRequest' => __DIR__ . '/../..' . '/app/StockRequest.php',
         'App\\Team' => __DIR__ . '/../..' . '/app/Team.php',
         'App\\Traits\\MultiTenantModelTrait' => __DIR__ . '/../..' . '/app/Traits/MultiTenantModelTrait.php',
         'App\\Transaction' => __DIR__ . '/../..' . '/app/Transaction.php',

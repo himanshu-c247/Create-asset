@@ -2,22 +2,19 @@
 
 namespace App;
 
-use \DateTimeInterface;
-use App\Traits\MultiTenantModelTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+use \DateTimeInterface;
 
-class Stock extends Model
+
+class StockRequest extends Model
 {
-    use SoftDeletes, MultiTenantModelTrait, HasFactory;
-
-    public $table = 'stocks';
+    use HasFactory;
+    public $table = 'stock_requests';
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
 
     protected $fillable = [
@@ -26,8 +23,8 @@ class Stock extends Model
         'category_id',
         'created_at',
         'updated_at',
-        'deleted_at',
-        'current_stock',
+        'stock',
+        'request',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -35,7 +32,6 @@ class Stock extends Model
         return $date->format('Y-m-d H:i:s');
 
     }
-
     public function asset()
     {
         return $this->belongsTo(Asset::class, 'asset_id');
@@ -45,5 +41,6 @@ class Stock extends Model
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
+
     }
 }

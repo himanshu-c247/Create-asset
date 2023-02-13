@@ -73,6 +73,15 @@
                         {{ trans('cruds.stock.title') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route("admin.stocks.request") }}" class="nav-link {{ request()->is('admin/request/') || request()->is('admin/request/') ? 'active' : '' }}">
+                        <i class=" fa fa-paper-plane nav-icon">
+                        </i>Request
+                        @admin
+                        <span class="right badge badge-danger">{{ stockRequestCount() }}</span>
+                       @endadmin
+                    </a>
+                </li>
             @endcan
             @can('transaction_access')
                 <li class="nav-item">

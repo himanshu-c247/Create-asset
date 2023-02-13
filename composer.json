@@ -43,7 +43,8 @@
         },
         "files": [
             "app/Helper/dateTimeHelper.php",
-            "app/Helper/teamHelper.php"
+            "app/Helper/teamHelper.php",
+            "app/Helper/requestCountHelper.php"
         ],
         "classmap": [
             "database/seeds",

@@ -2,6 +2,7 @@
 
 return [
     'actions'                              => 'Actions',
+    'request'                              => 'Request',
     'add'                                  => 'Add',
     'cancel'                               => 'Cancel',
     'allRightsReserved'                    => 'All rights reserved.',

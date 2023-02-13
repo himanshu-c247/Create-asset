@@ -7,7 +7,7 @@ use App\Team;
 use App\Asset;
 use App\Category;
 use Illuminate\Http\Request;
-use App\{Stock, Transaction, User};
+use App\{Stock, StockRequest, Transaction, User};
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStockRequest;
 use App\Http\Requests\UpdateStockRequest;
@@ -18,7 +18,6 @@ class StocksController extends Controller
 {
     public function index(Request $request)
     {
-
         abort_if(Gate::denies('stock_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
          $teamId = auth()->user()->team_id;
         if ($teamId == '1') {
@@ -216,5 +215,52 @@ class StocksController extends Controller
         } else {
             return response()->json(['status' => 'error', 'message' => 'Stock not available']);
         }
+    }
+
+    public function requestStock($id)
+    {
+        // abort_if(Gate::denies('assign_stock'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $stock = Stock::with('asset','team')->find($id);
+        $assignStockModel = view('admin.stocks.request-stock', compact('stock'))->render();
+        return response()->json(['status' => 'success', 'output' => $assignStockModel]);
+    }
+
+    public function requestStockStore(Request $request)
+    {
+        StockRequest::create($request->all());
+        return response()->json(['status' => 'success', 'message' => 'Request sent successfully !']);
+    }
+
+    public function requestList()
+    {
+        $stocks = StockRequest::with('team','asset')->get();
+        return view('admin.stocks.request-table',compact('stocks'));
+    }
+
+    public function acceptRequest($id)
+    {
+        $requestStock = StockRequest::find($id);
+        $teamId = $requestStock->team_id;
+        $assetId = $requestStock->asset_id;
+        $stock = $requestStock->stock;
+        $curruntStock = Stock::where('team_id',auth()->user()->team_id)->where('asset_id',$assetId)->first();
+        $userStock = Stock::where('team_id', $teamId)->where('asset_id',$assetId)->first();
+        $transaction = [
+            'stock'         => $stock,
+            'asset_id'      => $assetId,
+            'team_id'       => $teamId,     
+        ];
+        if($userStock && $curruntStock->current_stock >= $stock){
+            $userStock->increment('current_stock',$stock);
+            $curruntStock->decrement('current_stock',$stock);
+            $requestStock->update(['status' => '1']);
+            Transaction::create($transaction);
+            return response()->json(['status' => 'success', 'message' => 'Request Accept successfully !']);
+        }else{
+            return response()->json(['status' => 'error', 'message' => 'Stock not available!']);
+        }
+
+        
+
     }
 }

@@ -36,4 +36,8 @@ class Team extends Model
     {
         return $this->hasMany(Stock::class);
     }
+    public function requestStock()
+    {
+        return $this->hasMany(StockRequest::class);
+    }
 }
